@@ -1,0 +1,45 @@
+
+.slick-slider{
+    display: flex;
+    align-items: center;
+}
+#Slider{
+    background-color: white;
+}
+
+.slick-track{
+    display: flex;
+    align-items: center;
+    height: 15rem;
+}
+
+.slikImage{
+    width: 100%;
+    >img{
+        width: 100%;
+        /* height: 15rem; */
+        object-fit: contain;
+    }
+}
+
+.slick-next{
+    right: 40px !important;
+}
+.slick-prev{
+    left: 20px !important;
+    z-index: 100;
+}
+.slick-prev:before{
+    font-size: 40px;
+    border-radius: 100%;
+    color: gray;
+}
+
+.slick-next:before{
+    font-size: 40px;
+    border-radius: 100%;
+    color: gray;
+}
+.slick-dots{
+    bottom: 12px;
+}

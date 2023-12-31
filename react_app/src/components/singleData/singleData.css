@@ -1,0 +1,100 @@
+#SingleDataheader{
+    display: flex;
+    align-items:  center;
+    justify-content: space-between;
+    width: 100%;
+    height: 5rem;
+    margin-top: 1rem;
+    padding: 10px 3rem;
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    >img{
+        width: 4rem;
+        height: 4rem;
+        object-fit: contain;
+        border-radius: 5px;
+        box-shadow: 0px 3px 9px grey;
+    }
+    .details{
+        width: 60%;
+        font-size: 14px;
+    }
+    .price{
+        display: flex;
+        gap: 10px;
+    }
+}
+.SingleData {
+  display: flex;
+  padding: 1rem 1.5rem;
+  width: 100%;
+  .images {
+    width: 5rem;
+    padding: 10px;
+    > img {
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid black;
+    }
+  }
+  .focusImage {
+    width: 35rem;
+    height: 100vh;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+  .dataDetails {
+    display: grid;
+    width: 35rem;
+    padding: 1rem;
+    gap: 1rem;
+    .overView {
+      display: flex;
+      align-items: center;
+      font-size: 30px;
+      gap: 1em;
+      width: 100%;
+      padding: 1em;
+      border: 1px solid grey;
+    }
+
+    .price {
+      display: flex;
+      height: 5em;
+      gap: 10px;
+      gap: 15px;
+      border: 1px solid grey;
+      justify-content: space-between;
+      .offer,.finalPrice,.percentage {
+        width: 100%;
+        font-size: 50px;
+        text-align: center;
+      }
+      .percentage{
+        width: 7rem;
+        font-weight: 100;
+        background-color: red;
+        color: white;
+      }
+    }
+    .buttons {
+      display: flex;
+      width: 100%;
+      gap: 10px;
+      > button {
+        width: 100%;
+        height: 3rem;
+        font-size: large;
+        background-color: #f8a413;
+        border: none;
+        border-radius: 10px;
+      }
+      >button:hover{
+        background-color: #e3941e;
+      }
+    }
+  }
+}
