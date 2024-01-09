@@ -12,39 +12,38 @@ const getAllProducts= async (req,res)=>{
 
 const getAllCategogy= async ()=>{
   const allCategogy=await category.find({});
-  // console.log(allCategogy);
-  // categoryData=allCategogy
   return allCategogy;
 };
 
+// ==============================================================
+
 const createProduct = async (req, res) => {
     try {
-    //   console.log(req.files);
       const { ProductName,Quantity,Fetures,Description,categoryName,mrp,discount } = req.body;
       const images = req.files.map(file => file.filename);
+
       const productName = await getAllCategogy();
-      // console.log(ProductName,Quantity,Fetures,Description,categoryName);
-    //   console.log(images);
+
     for(let i=0;i<productName.length;i++){
       if(productName[i].categoryName == categoryName){
         categoryId=productName[i]._id;
       }
     }
-// console.log(categoryId);
    
-    // }
       if (!ProductName,!Quantity,!Fetures,!Description,!mrp,!discount) {
         res.status(400).json("All fields are mandatory");
       }
       else {
 
-        const newProduct = await product.create({
-          ProductName,Quantity,Fetures,Description,categoryName,mrp,discount,
-          categoryId:categoryId,
-          images:images,
-        });
+        // const newProduct = await product.create({
+        //   ProductName,Quantity,Fetures,Description,categoryName,mrp,discount,
+        //   categoryId:categoryId,
+        //   images:images,
+        // });
 
-        res.status(200).json(newProduct);
+        res.send(req.body);
+        console.log(req.files);
+        // res.send(req.files);
       }
     }
      catch (error) {
@@ -52,6 +51,8 @@ const createProduct = async (req, res) => {
     }
   };
   
+
+// ===============================================
 
 
 const getOneProductById=async (req,res)=>{

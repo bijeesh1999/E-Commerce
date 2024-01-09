@@ -4,7 +4,7 @@
   align-items: center;
   background-color: #131921;
   color: white;
-  padding: 5px;
+  padding: 5px 1.5rem;
   #cartAndSign {
     display: flex;
     gap: 2rem;
@@ -56,12 +56,24 @@
       background-color: #e3941e;
     }
   }
+  .cart,.signup{
+    cursor: pointer;
+  }
+  .cart{
+      position: relative;
+    >span{
+      position: absolute;
+      top: -2px;
+      left: 17px;
+    }
+  }
   .border {
     height: 3em;
     display: flex;
     align-items: center;
     padding: 0 10px;
     border: 1px solid #131921;
+    cursor: pointer;
   }
   .border:hover{
     border: 1px solid;

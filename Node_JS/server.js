@@ -12,14 +12,13 @@ app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 app.use(cookieParser());
 
-
-
-
 app.use("/products",require("./routers/productRouter"));
 app.use("/categories",require("./routers/categoryRouter"));
 app.use("/seller",require("./routers/sellerRouter"));
 app.use("/user",require("./routers/userRouter"));
 app.use("/cart",require("./routers/cartRouter"));
+app.use("/payment",require("./routers/paymentRouter"));
+
 
 app.use('/uploads',express.static(__dirname + '/uploads'));
 

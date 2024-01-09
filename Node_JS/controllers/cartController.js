@@ -12,19 +12,27 @@ const getAllCartData= async (req,res)=>{
     }
 }
 
+const getCartDataById= async (req,res)=>{
+    const {id}=req.params;
+    if(!id){
+        res.status(400).json("id not found")
+    }else{
+        const cartDataById=await cart.findById(id);
+        res.status(200).json(cartDataById)
+    }
+
+}
+
 
 const postCartData= async (req,res)=>{
     try{
         const {userId,productId,quantity}=req.body;
-        console.log(userId,productId,quantity);
-        if(!userId,!productId,!quantity){
-            res.status(400).json("all filelds are mandatory");
-        }else{
+        // console.log(userId,productId,quantity);
+
             const newCartData=await cart.create({
                 userId,productId,quantity
             });
             res.status(200).send(newCartData)
-        }
     }catch(error){
         res.status(500).send(error)
     }  
@@ -61,8 +69,7 @@ const deleteCartData= async (req,res)=>{
     else{
         res.status(400).json("id is not valid")
     }
-        
-    
+
 }
 
-module.exports={getAllCartData,postCartData,putCartDataById,deleteCartData};
+module.exports={getAllCartData,getCartDataById,postCartData,putCartDataById,deleteCartData};

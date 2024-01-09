@@ -4,6 +4,7 @@ import { getProducts,getProductById,postProduct,deleteProductById } from "./prod
 const initialState = {
     products: [],
     singleProduct:[],
+    postProduct:[],
     status: 'idle',
 };
 
@@ -37,19 +38,19 @@ const productSlice = createSlice({
                 state.status = "Failed";
             })
 
-    // // =====================================================================
+    // =====================================================================
 
-    //         .addCase(postCategoryData.pending, (state) => {
-    //             state.status = "Loading";
-    //         })
-    //         .addCase(postCategoryData.fulfilled, (state, action) => {
-    //             state.postCategoryData = action.payload;
-    //         })
-    //         .addCase(postCategoryData.rejected, (state) => {
-    //             state.status = "Failed";
-    //         })
+            .addCase(postProduct.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(postProduct.fulfilled, (state, action) => {
+                state.postProduct = action.payload;
+            })
+            .addCase(postProduct.rejected, (state) => {
+                state.status = "Failed";
+            })
 
-    // // ======================================================================
+    // ======================================================================
 
     //         .addCase(deleteCategoryById.pending, (state) => {
     //             state.status = "Loading";

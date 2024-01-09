@@ -1,0 +1,79 @@
+.sellerContainer {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  position: relative;
+  .productRevirw {
+    width: 60%;
+  }
+  .sellingForm {
+    display: flex;
+    width: 40%;
+    padding: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+    border-radius: 5px;
+    box-shadow: 0px 0px 15px #cacccd;
+    background-color: white;
+    position: absolute;
+    z-index: 2;
+    top: -30px;
+    left: calc(50% - 20%);
+    >input,textarea{
+      padding: 10px;
+      font-size: 15px;
+      width: 100%;
+      border:1px solid #d9dddd;
+    }
+    >textarea{
+        height: 5rem;
+    }
+    #categories{
+        height: 2rem;
+        border:1px solid #d9dddd;
+    }
+    .submitButton{
+        width: 100% !important;
+        display: flex;
+        justify-content: end;
+        #submit{
+            padding: 5px 12px;
+            background-color: #131921;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    }
+    >input:focus,textarea:focus,#categories:focus{
+        outline: none;
+        box-shadow: 0 0 10px #d0d1d1
+    }
+  }
+
+}
+
+#sellerHeader{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 2rem;
+  border: 1px solid;
+  .sellerButtons{
+    display: flex;
+    gap: 10px;
+    >button{
+      padding: 5px 10px;
+    }
+  }
+}
+
+#overlay{
+  width: 100%;
+  min-height: 120vh;
+  background-color: black;
+  opacity: .4;
+  position: absolute;
+  top: 0;
+}

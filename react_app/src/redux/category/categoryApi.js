@@ -27,9 +27,9 @@ export const getCategories = createAsyncThunk(
 //     'postCategoryData',
 //     async (data) => {
 //         console.log(data);
-//         const res = await axios.post(`http://localhost:8086/products`, data);
-//         console.log(res.data);
-//         return res.data;
+//         // const res = await axios.post(`http://localhost:8086/products`, data);
+//         // console.log(res.data);
+//         // return res.data;
 //     },
 // );
 

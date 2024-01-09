@@ -25,15 +25,15 @@ export const getProductById = createAsyncThunk(
     },
 );
 
-// export const postProduct = createAsyncThunk(
-//     'postCategoryData',
-//     async (data) => {
-//         console.log(data);
-//         const res = await axios.post(`http://localhost:8086/products`, data);
-//         console.log(res.data);
-//         return res.data;
-//     },
-// );
+export const postProduct = createAsyncThunk(
+    'postProduct',
+    async (formData) => {
+        console.log(formData);
+        const res = await axios.post(`http://localhost:8086/products`,formData);
+        console.log(res.data);
+        return res.data;
+    },
+);
 
 // export const deleteProductById = createAsyncThunk(
 //     'deleteCategoryById',

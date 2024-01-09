@@ -29,6 +29,7 @@ const getUserById = async (req,res) => {
 const postUser = async (req,res) => {
 
     const {userName,emailId,password}= req.body;
+    console.log(req.body);
     if(!userName,!emailId,!password){
         res.status(400).json("user is not found");
     }

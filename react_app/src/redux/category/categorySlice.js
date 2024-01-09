@@ -35,19 +35,19 @@ const categorySlice = createSlice({
     //             state.status = "Failed";
     //         })
 
-    // // =====================================================================
+    // =====================================================================
 
-    //         .addCase(postCategoryData.pending, (state) => {
-    //             state.status = "Loading";
-    //         })
-    //         .addCase(postCategoryData.fulfilled, (state, action) => {
-    //             state.postCategoryData = action.payload;
-    //         })
-    //         .addCase(postCategoryData.rejected, (state) => {
-    //             state.status = "Failed";
-    //         })
+            // .addCase(postCategoryData.pending, (state) => {
+            //     state.status = "Loading";
+            // })
+            // .addCase(postCategoryData.fulfilled, (state, action) => {
+            //     state.postCategoryData = action.payload;
+            // })
+            // .addCase(postCategoryData.rejected, (state) => {
+            //     state.status = "Failed";
+            // })
 
-    // // ======================================================================
+    // ======================================================================
 
     //         .addCase(deleteCategoryById.pending, (state) => {
     //             state.status = "Loading";

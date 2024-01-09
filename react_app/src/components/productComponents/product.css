@@ -38,3 +38,83 @@ h2{
 .mobileCollection,.fasionCollection,.LaptopCollections,.electronics,.WatchCollection,.homeAppliances{
     background-color: white;
 }
+
+#cart{
+    max-width: 1200px ;
+    margin: auto;
+    display: grid;
+    gap: 1rem;
+    padding-bottom: 1rem;
+
+    .cartHeadig{
+        padding: 1rem;
+    }
+    .cartDatas{
+        display: grid;
+        /* gap: 20px; */
+        padding: 0 12px ;
+        border: 1px solid grey;
+        border-radius: 5px;
+        .cartData{
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            padding: 10px;
+            border-bottom: 1px solid grey;
+            cursor: pointer;
+            >img{
+                width: 10rem;
+                padding: 10px;
+            }
+            .details{
+                display: grid;
+                gap: 1rem;
+                width: 100%;
+            }
+
+            .buttons{
+                display: flex;
+                justify-content: end;
+                gap: 10px;
+                >button{
+                    width: 6rem;
+                    padding: 6px 10px;
+                    border: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                >button:hover{
+                    box-shadow: 1px 3px 13px gray;
+
+                }
+                #byeNow{
+                    background-color: rgba(177, 255, 60, 0.863);
+                }
+                #remove{
+                    background-color: rgba(255, 0, 0, 0.767);
+                }
+            }
+        }
+    }
+    #total{
+        padding: 10px;
+        border: 1px solid;
+        align-items: end;
+        display: grid;
+        gap: 12px;
+        justify-content: end;
+        border-radius: 5px;
+        padding-right: 20px;
+    }
+}
+
+.buy:hover{
+    box-shadow: 1px 3px 13px gray;
+}
+.cartButton{
+    padding: 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(252, 217, 22);
+}

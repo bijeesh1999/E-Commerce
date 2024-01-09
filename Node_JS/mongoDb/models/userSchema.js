@@ -15,6 +15,15 @@ const userSchema=mongoose.Schema({
         type:String,
         required:true
     },
+    billingAddress:{
+        type:String,
+        required:null
+    },
+    shippingAddress:{
+        type:String,
+        required:null
+    },
+    cart:[],
     token:{
         type:String,
         required:null
