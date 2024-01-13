@@ -6,6 +6,7 @@ import Laptops from "./components/productComponents/laptops";
 import Electronics from "./components/productComponents/electronics";
 import Watches from "./components/productComponents/watches";
 import HomeAppliances from "./components/productComponents/homeAppliances";
+import Slick from "./slicCorosal/slicCurosel";
 
 
 function Home(){
@@ -13,6 +14,7 @@ function Home(){
         <>
         <Categorys />
         <div id="homeContainer">
+            <Slick />
             <Mobiles />
             <Fasion />
             <Laptops />

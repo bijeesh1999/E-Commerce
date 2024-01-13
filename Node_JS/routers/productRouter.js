@@ -5,7 +5,7 @@ const storage=require("../controllers/middleWares/multerMiddleware")
 
 const {getAllProducts,createProduct,getOneProductById,updateProductById,deleteProductsById,getAllCategogy}=require("../controllers/productController");
 
-const upload=multer({storage:storage}).array("files");
+const upload=multer({storage:storage}).array("images");
 
 
 Router.route("/")

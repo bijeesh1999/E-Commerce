@@ -2,12 +2,13 @@ const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 require("dotenv").config();
 const user=require("../../mongoDb/models/userSchema");
+const mongoose=require("mongoose")
 
 
 const getUser = async (req,res) => {
     const allUsers=await user.find({});
     if(!allUsers){
-        res.status(400).json("sellers not found")
+        res.status(400).json("user not found")
     }else{
         res.status(200).json(allUsers)
     }
@@ -31,11 +32,11 @@ const postUser = async (req,res) => {
     const {userName,emailId,password}= req.body;
     console.log(req.body);
     if(!userName,!emailId,!password){
-        res.status(400).json("user is not found");
+        res.status(201).json("user is not found");
     }
     const uservlid = await user.findOne({emailId});
     if(uservlid){
-        return res.status(401).json("user already registered plese use anotheer id");
+        return res.status(201).json("user already registered plese use anotheer id");
     }
     else{
         const hashPassword= await bcrypt.hash(password,10);
@@ -50,18 +51,75 @@ const postUser = async (req,res) => {
             )
         User.token=token,
         User.password=undefined
-        res.status(201).json(User);
+        res.status(200).json(User);
     };
 
 };
 
 
-const updateUser=()=>{
+const updateUser = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { productID } = req.body;
+        console.log(id, productID);
+
+        if (id && productID) {
+            const objectId= new mongoose.Types.ObjectId(productID) 
+            console.log(typeof objectId);
+
+            const userDocument = await user.findOne({ _id: id });
+
+            if (!userDocument) {
+                return res.status(404).json("User not found");
+            }
+            userDocument.cart.push(objectId);
+            await userDocument.save();
+
+            res.status(200).json(userDocument);
+            console.log(userDocument);
+        } else {
+            res.status(400).json("Invalid data");
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json("Internal Server Error");
+    }
+};
+
+
+
+
+
+
+const deleteUser=()=>{
+    
 
 }
 
-const deleteUser=()=>{
-
+const getCart=async (req,res)=>{
+    const {id}=req.params
+    console.log(id);
+    
+    const userData = await user.findOne({ _id: new mongoose.Types.ObjectId(id) });
+    const Data = await user.aggregate([
+        {
+            $match: {
+                _id: userData._id,
+            },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "cart",
+            foreignField: "_id",
+            as: "userCart",
+          },
+        },
+      ]);
+      
+      const userCart = [].concat(...Data?.flat().map(Data => Data.userCart));
+      res.status(200).json(userCart);
+      
 }
 
 module.exports={
@@ -69,7 +127,8 @@ module.exports={
     getUserById,
     postUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getCart
 }
 
 

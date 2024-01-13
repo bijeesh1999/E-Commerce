@@ -1,43 +1,46 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-import { getAllToCart , deleteOneToCart } from "../../redux/cart/cartApi";
-import { getProducts } from "../../redux/products/productApi";
+import { getUsersById , getUserCartById } from "../../redux/userAuth/userApi";
 import PayButton from "../payButton";
 
 function Cart(){
+    const [userID,setUserid]=useState(localStorage.getItem("userId"))
     const dispatch=useDispatch();
     useEffect(()=>{
-        dispatch(getAllToCart());
-        dispatch(getProducts());
+        dispatch(getUserCartById(userID))
     },[]);
 
-    const cartDatas=useSelector((state)=>state.cart.getAlldataToCart)
-    const allProducts= useSelector((state)=>state.product.products)
+    const cartDatas=useSelector((state)=>state.user.id)
+    const allProducts= useSelector((state)=>state.user.token)
+    const cartData=useSelector((state)=>state.user.cart.length)
 
-    let array=[];
-    let totalAmount=0
-    {cartDatas?.map((data)=>{
-        allProducts?.map((allproduct)=>{
-            if(data.productId === allproduct._id){
-                array.push(allproduct);
-                totalAmount+=(allproduct.mrp-allproduct.discount);
-            }
-        });
-    })}
-    const deleteFromeCart= (id)=>{
-        cartDatas.map((cartId)=>{
-        if(cartId.productId === id ){
-            dispatch(deleteOneToCart(cartId._id))
-            setTimeout(() => {
-                dispatch(getAllToCart());
-            },100);
-        }})
-    }
+console.log(cartData);
+// console.log(cartDatas);
+// console.log(allProducts);
+
+    // let array=[];
+    // let totalAmount=0
+    //     allProducts?.map((allproduct)=>{
+    //         if(data.productId === ){
+    //             array.push(allproduct);
+    //             totalAmount+=(allproduct.mrp-allproduct.discount);
+    //         }
+    //     });
+   
+    // const deleteFromeCart= (id)=>{
+    //     cartDatas.map((cartId)=>{
+    //     if(cartId.productId === id ){
+    //         dispatch(deleteOneToCart(cartId._id))
+    //         setTimeout(() => {
+    //             dispatch(getAllToCart());
+    //         },100);
+    //     }})
+    // }
 
     return(
         <React.Fragment>
-            <div id="cart">
+            {/* <div id="cart">
                 <h1 className="cartHeadig">Cart</h1>
                 <div className="cartDatas">
                     {array?.map((data,index)=>(
@@ -58,7 +61,7 @@ function Cart(){
                     <h4>free shipping</h4>
                     <PayButton data={array}/>
                 </div>
-            </div>
+            </div> */}
         </React.Fragment>
     )
 }

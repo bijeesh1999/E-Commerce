@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import UserRegister from "./userRegistration";
-import axios from "axios";
+import { userLogin } from "../../redux/userAuth/userApi";
 import "./user.css";
 
 
 function LoginUser({overlay}){
+  const dispatch=useDispatch();
   const navigate=useNavigate();
   const [login,SetLogin]=useState();
   const [register,setRegister]=useState(false);
-  console.log(login);
 
 
 const handleChange=(e)=>{
@@ -20,24 +21,19 @@ const handleChange=(e)=>{
 }
   const loginUser=async (e)=>{
     e.preventDefault();
-    console.log(login);
-    const res=await axios.post("http://localhost:8086/user/login",login)
-    console.log(res);
-    if(res.status=200){
-      navigate("/cart")
-    }
-    
-  
-  }
+    dispatch(userLogin(login))
 
+  }
   const showRegister=()=>{
     setRegister(true)
   }
 
-
+  const data=useSelector((state)=>state.user.loginedUser)
+  console.log(data);
     return(
       <>
       <div id="loginRegister">
+        <span>UserLogin</span>
         <div className="form">
           {register ? <UserRegister setRegister={setRegister}/> : null}
         <form onSubmit={loginUser}>

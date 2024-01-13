@@ -7,7 +7,10 @@ const dbConnection=require("./mongoDb/databaseConnection");
 const verify=require("./controllers/middleWares/jwtAuthToken");
 
 const app=express();
-app.use(cors());
+app.use(cors({
+    origin:"http://localhost:3000",
+    credentials:true
+}));
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
 app.use(cookieParser());
@@ -16,7 +19,6 @@ app.use("/products",require("./routers/productRouter"));
 app.use("/categories",require("./routers/categoryRouter"));
 app.use("/seller",require("./routers/sellerRouter"));
 app.use("/user",require("./routers/userRouter"));
-app.use("/cart",require("./routers/cartRouter"));
 app.use("/payment",require("./routers/paymentRouter"));
 
 

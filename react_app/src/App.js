@@ -7,7 +7,9 @@ import SingleCategory from "./components/categoryComponent/singleCategoryData";
 import Home from "./homePage";
 import Cart from "./components/productComponents/cart";
 import SellerPage from "./components/seller/sellerPage";
+import SuperAdmin from "./components/superAdmin/superAdminPannel";
 import "./App.css";
+import AllProuct from "./components/superAdmin/allProducts";
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<ByProduct />} />
           <Route path="/adminSelling" element={<SellerPage />} />
+          <Route path="/superAdmin" element={<SuperAdmin />} />
+          <Route path="/allProduct" element={<AllProuct />} />
         </Routes>
       </BrowserRouter>
     </div>

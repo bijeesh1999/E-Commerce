@@ -22,7 +22,7 @@ const getSellerById = async (req,res) => {
         res.status(200).json(getIdData)
     }
     else{
-        res.status(400).json("this data is not valid")
+        res.status(201).json("this data is not valid")
     }
 }
 
@@ -32,12 +32,12 @@ const postSeller = async (req,res) => {
     const {userName,emailId,password}=await req.body;
     console.log(req.body);
     if(!userName,!emailId,!password){
-        res.status(400).json("seller is not found");
+        res.status(201).json("seller is not found");
     }
     // const emailId=sellerData.emailId;
     const uservlid = await seller.findOne({emailId});
     if(uservlid){
-        return res.status(401).json("user already registered")
+        return res.status(201).json("user already registered")
     }
     else{
         const hashPassword=await bcrypt.hash(password,10);
@@ -52,7 +52,7 @@ const postSeller = async (req,res) => {
         )
         Seller.token=token,
         Seller.password = undefined
-        res.status(201).json(Seller)
+        res.status(200).json(Seller)
     };
 
 };

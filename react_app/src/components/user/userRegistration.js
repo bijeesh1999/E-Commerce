@@ -22,6 +22,7 @@ function UserRegister({setRegister}){
 
       return (
         <div id="userRegister">
+          <span>UserRegister</span>
         <form onSubmit={registerUser}>
         <div className="input-container">
             <label>userName</label>

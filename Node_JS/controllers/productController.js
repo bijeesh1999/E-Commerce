@@ -21,6 +21,8 @@ const createProduct = async (req, res) => {
     try {
       const { ProductName,Quantity,Fetures,Description,categoryName,mrp,discount } = req.body;
       const images = req.files.map(file => file.filename);
+      // console.log(images);
+      // console.log(req.body)
 
       const productName = await getAllCategogy();
 
@@ -35,15 +37,14 @@ const createProduct = async (req, res) => {
       }
       else {
 
-        // const newProduct = await product.create({
-        //   ProductName,Quantity,Fetures,Description,categoryName,mrp,discount,
-        //   categoryId:categoryId,
-        //   images:images,
-        // });
+        const newProduct = await product.create({
+          ProductName,Quantity,Fetures,Description,categoryName,mrp,discount,
+          categoryId:categoryId,
+          images:images,
+        });
 
-        res.send(req.body);
-        console.log(req.files);
-        // res.send(req.files);
+        res.send(newProduct);
+        console.log(newProduct);
       }
     }
      catch (error) {

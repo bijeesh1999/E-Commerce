@@ -39,7 +39,7 @@ function Mobiles() {
 
   return (
     <>
-      <Slick />
+      {/* <Slick /> */}
     <div className="mobileCollection">
       <h2>Mobiles</h2>
       <div className="Mobiles">

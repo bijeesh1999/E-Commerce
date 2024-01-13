@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategories,getCategoryDataById,postCategoryData,deleteCategoryById } from "./categoryApi";
+import { getCategories,updateCategory,postCategoryData,deleteCategoryById } from "./categoryApi";
 
 const initialState = {
     categories: [],
+    postCategory:[],
+    deleted:[],
+    update:[],
     status: 'idle',
 };
 
@@ -25,39 +28,40 @@ const categorySlice = createSlice({
 
     // ====================================================================
 
-    //         .addCase(getCategoryDataById.pending, (state) => {
-    //             state.status = "Loading";
-    //         })
-    //         .addCase(getCategoryDataById.fulfilled, (state, action) => {
-    //             state.getCategoryDataById = action.payload;
-    //         })
-    //         .addCase(getCategoryDataById.rejected, (state) => {
-    //             state.status = "Failed";
-    //         })
+            .addCase(updateCategory.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(updateCategory.fulfilled, (state, action) => {
+                state.update = action.payload;
+            })
+            .addCase(updateCategory.rejected, (state) => {
+                state.status = "Failed";
+            })
 
     // =====================================================================
 
-            // .addCase(postCategoryData.pending, (state) => {
-            //     state.status = "Loading";
-            // })
-            // .addCase(postCategoryData.fulfilled, (state, action) => {
-            //     state.postCategoryData = action.payload;
-            // })
-            // .addCase(postCategoryData.rejected, (state) => {
-            //     state.status = "Failed";
-            // })
+            .addCase(postCategoryData.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(postCategoryData.fulfilled, (state, action) => {
+                state.postCategory = action.payload;
+    
+            })
+            .addCase(postCategoryData.rejected, (state) => {
+                state.status = "Failed";
+            })
 
     // ======================================================================
 
-    //         .addCase(deleteCategoryById.pending, (state) => {
-    //             state.status = "Loading";
-    //         })
-    //         .addCase(deleteCategoryById.fulfilled, (state, action) => {
-    //             state.deleteCategoryById = action.payload;
-    //         })
-    //         .addCase(deleteCategoryById.rejected, (state) => {
-    //             state.status = "Failed";
-    //         })
+            .addCase(deleteCategoryById.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(deleteCategoryById.fulfilled, (state, action) => {
+                state.deleted = action.payload;
+            })
+            .addCase(deleteCategoryById.rejected, (state) => {
+                state.status = "Failed";
+            })
     },
 });
 

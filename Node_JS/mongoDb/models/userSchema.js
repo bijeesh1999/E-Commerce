@@ -5,15 +5,15 @@ const userSchema=mongoose.Schema({
 
     userName:{
         type:String,
-        required:true
+        required:null
     },
     emailId:{
         type:String,
-        required:true
+        required:null
     },
     password:{
         type:String,
-        required:true
+        required:null
     },
     billingAddress:{
         type:String,
@@ -23,8 +23,12 @@ const userSchema=mongoose.Schema({
         type:String,
         required:null
     },
-    cart:[],
-    token:{
+    cart: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Product',
+        },
+    ],    token:{
         type:String,
         required:null
     }

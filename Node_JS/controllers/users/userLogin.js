@@ -9,7 +9,7 @@ const userLogin = async (req,res) => {
     const {emailId,password}= await req.body;
     if(!(emailId,password)){
 
-        res.status(400).json("emailid and passwod is required")
+        res.status(201).json("emailid and passwod is required")
 
     }
     const userValid = await user.findOne({emailId});
@@ -31,9 +31,12 @@ const userLogin = async (req,res) => {
             token,
             userValid
           });
+
+        //   console.log("token:",token)
+        //   console.log("req.cookies",userValid)
     }
     else{
-        res.status(400).json("user is not found please sign in ")
+        res.status(201).json("user is not found please sign in ")
     }
 
 

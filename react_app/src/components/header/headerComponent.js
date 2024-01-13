@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getAllToCart } from "../../redux/cart/cartApi";
+import LoginSeller from "../seller/sellerLogin";
 import LoginUser from "../user/userLogin";
 import SearchBar from "./searchBar";
 import "./header.css";
@@ -10,26 +10,27 @@ function Header() {
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const [login , setLogin]=useState(false);
+  const [sellerlogin,setSellerLogin]=useState(false)
 
   useEffect(()=>{
-    dispatch(getAllToCart())
   },[dispatch])
 
-  const cartData=useSelector((state)=>state.cart.getAlldataToCart)
+  const cartData=useSelector((state)=>state.user.cart.length)
+  // console.log(cartData);
 
   const sellerAuth=()=>{
     // if(sessionStorage.cookie){
       navigate("/adminSelling")
     // }else{
-    //   setLogin(true)
+    //   setSellerLogin(true)
     // }
   }
     const userAuth=()=>{
-    if(sessionStorage.cookie){
-      navigate("/cart")
-    }else{
-      setLogin(true)
-    }
+    // if(cartData.token){
+    //   navigate("/cart")
+    // }else{
+    //   setLogin(true)
+    // }
   }
 
 
@@ -44,12 +45,13 @@ function Header() {
         <div className="seller border" onClick={()=>sellerAuth()}>Become a seller</div>
           <div className="signup border" onClick={()=>userAuth()}>sing in</div>
           <div className="cart border" onClick={()=>userAuth()}>
-            <span>{cartData.length}</span>
+            <span>{cartData}</span>
             <i className="material-symbols-outlined">remove_shopping_cart</i>Cart
           </div>
         </div>
       </header>
       {login ? <LoginUser overlay={login}/>:null}
+      {sellerlogin ? <LoginSeller overlay={sellerlogin}/>:null}
     </React.Fragment>
   );
 }

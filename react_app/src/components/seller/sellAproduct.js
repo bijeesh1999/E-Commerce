@@ -13,10 +13,10 @@ function SellerForm({SetNewProduct}) {
     discount: '',
     mrp: '',
   });
-  const [file,SetFiles]=useState()
+  const [fileImage,setFileImage]=useState([])
     const dispatch=useDispatch();
 
-    console.log(file);
+    console.log(fileImage);
     // file?.map(img=>console.log(img))
     useEffect(()=>{
         dispatch(getCategories())
@@ -35,15 +35,27 @@ function SellerForm({SetNewProduct}) {
     };
 
   const files = (e) => {
-    const filesArray = Array.from(e.target.files);
-    SetFiles(
-      filesArray
+    setFileImage(
+      e.target.files
     );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(postProduct({formData,file}))
+    const {ProductName,Quantity,Description,category,fetures,discount,mrp} = formData
+    const form=new FormData();
+    form.append("ProductName",ProductName)
+    form.append("Quantity",Quantity)
+    form.append("Description",Description)
+    form.append("categoryName",category)
+    form.append("Fetures",fetures)
+    form.append("discount",discount)
+    form.append("mrp",mrp)
+    for (let file of fileImage) {
+      form.append("images",file);
+    }
+    
+    dispatch(postProduct(form))
   }
 
   return (
