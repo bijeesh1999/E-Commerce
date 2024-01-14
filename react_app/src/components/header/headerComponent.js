@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import LoginSeller from "../seller/sellerLogin";
 import LoginUser from "../user/userLogin";
 import SearchBar from "./searchBar";
+import { getUsersById } from "../../redux/userAuth/userApi";
 import "./header.css";
+
 
 function Header() {
   const dispatch=useDispatch();
@@ -12,11 +14,16 @@ function Header() {
   const [login , setLogin]=useState(false);
   const [sellerlogin,setSellerLogin]=useState(false)
 
+  const userId=useSelector((state)=>state.user.id)
+
+
   useEffect(()=>{
+    dispatch(getUsersById(userId))
   },[dispatch])
 
-  const cartData=useSelector((state)=>state.user.cart.length)
-  // console.log(cartData);
+  const cartData=useSelector((state)=>state.user.getSingle.cart?.length)
+
+  // console.log(cartData?.length);
 
   const sellerAuth=()=>{
     // if(sessionStorage.cookie){
@@ -27,7 +34,7 @@ function Header() {
   }
     const userAuth=()=>{
     // if(cartData.token){
-    //   navigate("/cart")
+      navigate("/cart")
     // }else{
     //   setLogin(true)
     // }

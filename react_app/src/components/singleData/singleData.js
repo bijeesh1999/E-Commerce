@@ -20,6 +20,9 @@ const id=params.id;
     },[dispatch,id])
 
     const data= useSelector((state)=>state.product.singleProduct);
+    const cartDatas = useSelector((state) => state.user.getSingle.cart);
+
+
     let sellingPrice=data.mrp-data.discount;
     let discountPer=Math.ceil((data.discount / data.mrp)*100)
     // console.log(discountPer);
@@ -56,7 +59,7 @@ const id=params.id;
                     <div className="offer" style={{textDecoration:" line-through"}}>{data?.mrp}</div>
                 </div>
                 <div className="buttons">
-                    <CartButton id={data._id}/>
+                    <CartButton id={data._id} cartDatas={cartDatas}/>
                     <PayButton data={[data]}/>
                 </div>
             </div>

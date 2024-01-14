@@ -1,36 +1,31 @@
 import React, { useEffect, useState } from "react";
 import {useNavigate} from "react-router-dom"
 import { useSelector, useDispatch } from "react-redux";
-import { getUsersById , getUserCartById } from "../../redux/userAuth/userApi";
+import { getUserCartById } from "../../redux/userAuth/userApi";
 import PayButton from "../payButton";
 
 function Cart(){
-    const [userID,setUserid]=useState(localStorage.getItem("userId"))
     const dispatch=useDispatch();
     useEffect(()=>{
-        dispatch(getUserCartById(userID))
+        dispatch(getUserCartById(userId))
     },[]);
 
-    const cartDatas=useSelector((state)=>state.user.id)
-    const allProducts= useSelector((state)=>state.user.token)
-    const cartData=useSelector((state)=>state.user.cart.length)
+    const userId=useSelector((state)=>state.user.id)
+    const token= useSelector((state)=>state.user.token)
+    const cartData=useSelector((state)=>state.user.cart)
 
+console.log(userId);
 console.log(cartData);
-// console.log(cartDatas);
 // console.log(allProducts);
 
     // let array=[];
-    // let totalAmount=0
-    //     allProducts?.map((allproduct)=>{
-    //         if(data.productId === ){
-    //             array.push(allproduct);
-    //             totalAmount+=(allproduct.mrp-allproduct.discount);
-    //         }
-    //     });
+    let totalAmount=0
+        cartData?.map((data)=>{
+                totalAmount+=(data.mrp-data.discount);
+        });
    
     // const deleteFromeCart= (id)=>{
-    //     cartDatas.map((cartId)=>{
-    //     if(cartId.productId === id ){
+    //     cartData?.map((data)=>{
     //         dispatch(deleteOneToCart(cartId._id))
     //         setTimeout(() => {
     //             dispatch(getAllToCart());
@@ -40,17 +35,17 @@ console.log(cartData);
 
     return(
         <React.Fragment>
-            {/* <div id="cart">
+            <div id="cart">
                 <h1 className="cartHeadig">Cart</h1>
                 <div className="cartDatas">
-                    {array?.map((data,index)=>(
+                    {cartData?.map((data,index)=>(
                         <div className="cartData" key={index} >
                             <img src={`http://localhost:8086/uploads/${data.images[0]}`} alt="" />
                             <div className="details">
                                 <h2>{data.ProductName}</h2>
                                 <h3>{data.Description}</h3>
                                 <div className="buttons">
-                                    <button id="remove" onClick={()=>deleteFromeCart(data._id)}>Remove</button>
+                                    {/* <button id="remove" onClick={()=>deleteFromeCart(data._id)}>Remove</button> */}
                                 </div>
                             </div>
                         </div>
@@ -59,9 +54,9 @@ console.log(cartData);
                 <div id="total">
                     <h3>total amount:{totalAmount}</h3>
                     <h4>free shipping</h4>
-                    <PayButton data={array}/>
+                    <PayButton data={cartData}/>
                 </div>
-            </div> */}
+            </div>
         </React.Fragment>
     )
 }

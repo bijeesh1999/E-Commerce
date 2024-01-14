@@ -8,7 +8,7 @@ export const userLogin = createAsyncThunk("userLogin", async (login) => {
   const res = await axios.post("http://localhost:8086/user/login", login, {
     withCredentials: true,
   });
-  localStorage.setItem("userToken", JSON.stringify(res.data.token))
+  localStorage.setItem("userToken",res.data.token)
   localStorage.setItem("userId", res.data.userValid._id)
   return res;
 });
@@ -42,7 +42,6 @@ export const updateUser = createAsyncThunk("updateUsers", async ({userId , produ
 
 
 export const getUsersById = createAsyncThunk("getUsersById", async (id) => {
-  console.log(id);
   let res = await axios.get(`http://localhost:8086/user/${id}`);
   console.log(res);
   return res.data;

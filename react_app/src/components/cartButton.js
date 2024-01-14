@@ -1,40 +1,46 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch } from "react-redux";
-// import { addToCart,getAllToCart } from "../redux/cart/cartApi";
 import { updateUser } from "../redux/userAuth/userApi";
-import { userLogin } from "../redux/userAuth/userApi";
+import { getUsersById } from "../redux/userAuth/userApi";
+
 
 function CartButton(props){
-  // alert(props.id)
-  let userId;
-  let userToken;
+  // alert(props)
     const [cart,setCart]=useState(false);
     const dispatch=useDispatch();
     const navigate=useNavigate();
-    // console.log(cart);
 
     useEffect(()=>{
-      // dispatch(getAllToCart());
-      userId = localStorage.getItem('userId');
-      userToken = localStorage.getItem('userToken');
+      dispatch(getUsersById(userId));
     },[]);
 
-    // const cartDatas=useSelector((state)=>state.cart.getAlldataToCart)
-    console.log(userId,userToken);
+    const userId=useSelector((state)=>state.user.id)
+    const cartDatas=useSelector((state)=>state.user.getSingle.cart)
+    const userToken=useSelector((state)=>state.user.token)
 
-    // useEffect(()=>{
-    //     const foundItem = cartDatas.some((data) => data.productId === props.id);
-    //     if (foundItem === true) {
-    //       setCart(foundItem);
-    //     } else {
-    //       setCart(foundItem); 
-    //     }
-    //   },[props.id,cartDatas])
+    useEffect(() => {
+      if (props.cartDatas && props.cartDatas.length > 0) {
+        const foundItem = props.cartDatas.some((data) => data === props.id);
+        if(foundItem === true){
+          console.log(foundItem);
+          setCart(foundItem);
+        }else{
+          setCart(foundItem)
+        }
+      }
+    }, [props]);
+
+
+    // console.log(cartDatas);
+    // console.log(userId,userToken);
+
+
 
     const postToCart= async (data)=>{
-      dispatch(updateUser(userId , {productID:data.id}));
-      // setCart(true);
+      console.log(data.id  ,   userId);
+      dispatch(updateUser({userId , productID:data.id}));
+      setCart(true);
       // // setTimeout(() => {
       // //   dispatch(getAllToCart());
       // // }, 100);
