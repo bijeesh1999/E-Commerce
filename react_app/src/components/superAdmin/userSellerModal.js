@@ -19,7 +19,7 @@ function UserSeller(props) {
 
   return (
     <>
-      <table>
+      <table id="list">
         <caption>DataTable</caption>
         <thead>
           <tr>
@@ -28,13 +28,14 @@ function UserSeller(props) {
           </tr>
         </thead>
         <tbody>
-          {data?.map((data)=>(
-          <tr>
-            <th>{data.userName}</th>
-            <td>{data.emailId}</td>
+          {data?.map((data , index)=>(
+          <tr key={index}>
+            <td>{data.userName}</td>
+            <td className="email">{data.emailId}</td>
           </tr>
           ))}
         </tbody>
+        <button className="close">close</button>
       </table>
     </>
   );

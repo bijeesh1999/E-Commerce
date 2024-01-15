@@ -19,7 +19,7 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="/product/:id" element={<SingleProduct />} />
-          <Route path="/success" element={<ByProduct />} />
+          <Route path="/success/:id" element={<ByProduct />} />
           <Route path="/singleCategory/:id" element={<SingleCategory />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="*" element={<ByProduct />} />

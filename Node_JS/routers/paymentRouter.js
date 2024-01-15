@@ -1,11 +1,12 @@
 const express=require ("express");
-const payment=require('../controllers/paymentController')
+const {payment,getPayment}=require('../controllers/paymentController')
 
 const Router=express.Router();
 
 
 
 Router.route("/").post(payment)
+Router.route("/:id").get(getPayment)
 
 
 

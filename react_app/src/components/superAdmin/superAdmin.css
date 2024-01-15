@@ -1,8 +1,148 @@
 table {
-    border: 2px solid forestgreen;
-    th {
-        border-bottom: 1px solid black;
+    /* border: 2px solid forestgreen; */
+    width: 100%;
+    width: 23rem;
+    .actions{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 24px;
+        margin-top: 8px;
+        i{
+            cursor: pointer;
+        }
     }
-     
 
+}
+
+button{
+    cursor: pointer;
+}
+
+.wraper{
+    display: flex;
+    #menuBar{
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        text-align: center;
+        background: rgb(3,8,46);
+        background: linear-gradient(190deg, rgba(3,8,46,1) 21%, rgba(14,9,96,1) 72%, rgba(30,23,142,1) 100%);
+        min-height: 100vh;
+        color: white;
+        #menuBarButtons{
+            display: grid;
+            gap: 1.5rem;
+            .menuButton{
+                font-family:'Material Symbols Outlined';
+                padding: 15px 5px;
+                font-size: 16px;
+                border-radius: 7px;
+                background: transparent;
+                border: none;
+                opacity: .7;
+                color: white;
+                font-weight: 800;
+            }
+            .menuButton:hover{
+                opacity: .9;
+                background-color: rgba(190, 188, 188, 0.466);
+                opacity: .6;
+                
+                
+            }
+        }
+    }
+    .dashboard{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        flex: 1;
+        position: relative;
+        padding-top: 1rem;
+        .div{
+            width: 200px;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgb(17,58,85);
+            background: linear-gradient(190deg, rgba(17,58,85,1) 25%, rgba(27,103,201,1) 56%, rgba(73,18,200,1) 100%);
+            font-size: 2rem;
+            font-weight: 300;
+            box-shadow: 0px 5px 15px #b4b9b0;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            #categoryModal {
+                position: absolute;
+                z-index: 10;
+                top: 2rem;
+                left: calc(50% - 18rem);
+                padding: 10px 15px;
+                background-color: aliceblue;
+                color: #08185d;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                border-radius: 5px;
+                form{
+                    display: grid;
+                    gap: 10px;
+                    padding: 10px 15px;
+                    background-color: rgb(45, 22, 175);
+                    input{
+                        padding: 5px 7px;
+                        font-size: 13px;
+                    }
+                    .buttons{
+                        display: flex;
+                        justify-content: space-between;
+                        .button{
+                            width: 5rem;
+                        }
+                    }
+                }
+                .addCategory{
+                    width: 3rem;
+                    padding: 5px 10px;
+                }
+                #close{
+                    font-weight: 800;
+                    background: transparent;
+                    border: none;
+                }
+            }
+        }
+    }
+    #overlay{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        background-color: rgb(79, 82, 82);
+    }
+}
+
+#list{
+    width: unset;
+    background-color: aliceblue;
+    color: #08185d;
+    position: absolute;
+    top: 2rem;
+    left: calc(50% - 23rem);
+    width: 35rem;
+    z-index: 10;
+    caption{
+        background-color: aliceblue;
+    }
+    .email{
+        text-align: center;
+    }
+    .close{
+        width: 4rem;
+        padding: 5px 10px;
+        margin: 10px ;
+    }
 }

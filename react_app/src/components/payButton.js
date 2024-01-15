@@ -1,18 +1,23 @@
 import React from "react";
 import axios from "axios";
+import { useSelector } from 'react-redux'
 
 
 
-function PayButton(props){
-const data=props.data;
-// console.log("hello:",data);
-    const handleOrder= ()=>{
-         axios.post(`http://localhost:8086/payment`,data)
+
+function PayButton (props){
+    const id=useSelector((state)=>state.user.id);
+    let products=props.data;
+    let total=props.amount;
+    let {...data}={products,id,total}
+console.log("hello:",props);
+    const handleOrder= async ()=>{
+        await axios.post(`http://localhost:8086/payProduct/`,data)
         .then((res)=>{
-            console.log(res.data);
-            if(res.data.session.url){
+            console.log(res);
+            if(res.data.url){
                 console.log(res.data.url);
-                window.location.href=res.data.session.url
+                window.location.href=res.data.url
             }
         }).catch((err)=>{
             console.log(err);

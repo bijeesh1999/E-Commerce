@@ -15,6 +15,7 @@ function SuperAdmin(){
     const [categoty,setCategory]=useState(false);
     const [user,setUser]=useState(false);
     const [seller,setSeller]=useState(false)
+    const [overlay,setOverlay]=useState(false)
     const [userData,setUsers]=useState()
     const [sellerData,setSellerData]=useState()
 
@@ -27,15 +28,18 @@ function SuperAdmin(){
 
     const categoryModal=()=>{
         setCategory(true)
+        setOverlay(true)
     }
     const allUsers=()=>{
         setUser(true)
         setUsers(users)
+        setOverlay(true)
     }
 
     const allSellers=()=>{
         setSeller(true);
         setSellerData(sellers)
+        setOverlay(true)
     }
 
 
@@ -46,29 +50,37 @@ function SuperAdmin(){
 
     return(
         <>
-        <header id="superHeader">
-            <h1>Header</h1>
-        </header>
         <div className="wraper">
-            <div className="allDataContaine">
+        <div id="menuBar">
+            <h1>Header</h1>
+            <div id="menuBarButtons">
+            <button className="menuButton">hello</button>
+            <button className="menuButton">hello</button>
+            <button className="menuButton">topper</button>
+            <button className="menuButton">log out</button>
+            </div>
+                
+        </div>
+            {/* <div className="allDataContainer"> */}
                 <div className="dashboard">
-                    <div className="allProducts" onClick={()=>navigate("/allProduct")}>
+                    <div className="allProducts div" onClick={()=>navigate("/allProduct")}>
                         allProducts
                     </div>
-                    <div className="allCategories" onClick={categoryModal}>
+                    <div className="allCategories div" onClick={categoryModal}>
                         allCategories
-                        {categoty ? <CategoryModal categorie={categorie}/> : null}
+                        {categoty ? <CategoryModal categorie={categorie} /> : null}
                     </div>
-                    <div className="allUsers" onClick={allUsers}>
+                    <div className="allUsers div" onClick={allUsers}>
                         allUsers
                        {user ? <UserSeller users={userData} />:null}
                     </div>
-                    <div className="allSellers"onClick={allSellers}>
+                    <div className="allSellers div"onClick={allSellers}>
                         allSellers
                         {seller ? <UserSeller sellers={sellerData} /> : null}
                     </div>
                 </div>
-            </div>
+            {/* </div> */}
+            {overlay ? <div id="overlay"></div> : null}
         </div>
         </>
     )

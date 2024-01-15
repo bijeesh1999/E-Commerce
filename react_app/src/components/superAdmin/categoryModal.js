@@ -4,6 +4,9 @@ import { deleteCategoryById , getCategories , postCategoryData , updateCategory}
 import "./superAdmin.css"
 
 function CategoryModal(props) {
+  console.log(props);
+  const [form , setForm]=useState(false)
+
   const [add,setAdd]=useState({
     categoryName:""
   })
@@ -20,12 +23,12 @@ function CategoryModal(props) {
     const editCategory=(data)=>{
         console.log(data);
         setButton(true)
+        setForm(true)
         setAdd(data)
-
     }
 
     const addModal=()=>{
-        alert()
+      setForm (true)   
     }
   const handleSubmit=(e)=>{
     setAdd({
@@ -41,16 +44,20 @@ function CategoryModal(props) {
   const editData = (e) => {
     e.preventDefault();
     dispatch(updateCategory(add));
+    setForm(false)
+
   };
 
   return (
     <div id="categoryModal">
-        <button className="addCategory" onClick={()=>addModal()}>Add
-        </button>
-        <form >
+        <button className="addCategory" onClick={()=>addModal()}>Add</button>
+        {form ? <form >
         <input type="test" name="categoryName" value={add.categoryName} onChange={handleSubmit} />
-        {button? <input type="submit" value="edit" onClick={editData}/> :<input type="submit" value="submit"onClick={addCategory} />}
-        </form>
+        <div className="buttons">
+        {button? <input type="submit" value="edit" className="button" onClick={editData}/> :<input type="submit" className="button" value="submit"onClick={addCategory} />}
+        <button className="button" onClick={()=>{setForm(false)}}>cancel</button>
+        </div>
+        </form> : null}
       <table>
       <thead>
     <tr>
@@ -62,13 +69,16 @@ function CategoryModal(props) {
     {category?.map((data , index)=>(    
     <tr key={index}>
       <td>{data.categoryName}</td>
-      <td><i className="fa-solid fa-trash" onClick={()=>deleteCategory(data._id)}></i>
+      <td className="actions"><i className="fa-solid fa-trash" onClick={()=>deleteCategory(data._id)}></i>
       <i className="fa-solid fa-pen-to-square" onClick={()=>editCategory(data)}></i>
       </td>
     </tr>
     ))}
   </tbody>
       </table>
+      <div style={{display:"flex", justifyContent:"flex-end" , width:"100%"}}>
+      <button id="close" onClick={()=>{setForm(false)}}>X</button>
+      </div>
     </div>
   );
 }

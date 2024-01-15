@@ -54,7 +54,7 @@ console.log(cartData);
                 <div id="total">
                     <h3>total amount:{totalAmount}</h3>
                     <h4>free shipping</h4>
-                    <PayButton data={cartData}/>
+                    <PayButton data={cartData} amount={totalAmount}/>
                 </div>
             </div>
         </React.Fragment>

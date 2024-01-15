@@ -22,6 +22,7 @@ function SellerPage() {
           <button onClick={()=>sellProduct()}>sell a Product</button>
           <button>customerse</button>
           <button>log out</button>
+          <button>my-Products</button>
           </div>
         </header>
       <div className="sellerContainer">
