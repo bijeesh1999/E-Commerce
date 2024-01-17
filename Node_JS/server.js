@@ -20,6 +20,7 @@ app.use("/categories",require("./routers/categoryRouter"));
 app.use("/seller",require("./routers/sellerRouter"));
 app.use("/user",require("./routers/userRouter"));
 app.use("/payProduct",require("./routers/paymentRouter"));
+app.use("/order" , require("./routers/orderRouter"));
 
 
 app.use('/uploads',express.static(__dirname + '/uploads'));

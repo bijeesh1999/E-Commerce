@@ -16,11 +16,11 @@ const userSchema=mongoose.Schema({
         required:null
     },
     billingAddress:{
-        type:String,
+        type:Object,
         required:null
     },
     shippingAddress:{
-        type:String,
+        type:Object,
         required:null
     },
     cart: [
@@ -28,10 +28,11 @@ const userSchema=mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Product',
         },
-    ],    token:{
+    ],    
+    token:{
         type:String,
         required:null
-    }
+    },
 
 },{
     timestamps:true

@@ -8,8 +8,9 @@ import Home from "./homePage";
 import Cart from "./components/productComponents/cart";
 import SellerPage from "./components/seller/sellerPage";
 import SuperAdmin from "./components/superAdmin/superAdminPannel";
-import "./App.css";
 import AllProuct from "./components/superAdmin/allProducts";
+import OrderSummary from "./components/user/orderSummary";
+import "./App.css";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/adminSelling" element={<SellerPage />} />
           <Route path="/superAdmin" element={<SuperAdmin />} />
           <Route path="/allProduct" element={<AllProuct />} />
+          <Route path="/OrderSummary/:id" element={<OrderSummary />} />
         </Routes>
       </BrowserRouter>
     </div>

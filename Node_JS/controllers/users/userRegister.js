@@ -61,7 +61,8 @@ const updateUser = async (req, res) => {
     try {
         const { id } = req.params;
         const { productID } = req.body;
-        console.log(id, productID);
+        console.log(req.body);
+        // console.log(id, productID);
 
         if (id && productID) {
             const objectId= new mongoose.Types.ObjectId(productID) 
@@ -76,8 +77,15 @@ const updateUser = async (req, res) => {
             await userDocument.save();
 
             res.status(200).json(userDocument);
-            console.log(userDocument);
-        } else {
+            // console.log(userDocument);
+        } 
+
+        // else if(id , req.body){
+        //     console.log(id,req.body);
+        // }
+
+
+        else {
             res.status(400).json("Invalid data");
         }
     } catch (error) {
