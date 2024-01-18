@@ -40,6 +40,10 @@ function Header() {
     // }
   }
 
+  const myOrder = () =>{
+    navigate("/MyOrder")
+  }
+
 
   return (
     <React.Fragment>
@@ -49,6 +53,7 @@ function Header() {
         </div>
         <SearchBar />
         <div id="cartAndSign">
+        <div className="seller border" onClick={()=>myOrder()}>my-Order</div>
         <div className="seller border" onClick={()=>sellerAuth()}>Become a seller</div>
           <div className="signup border" onClick={()=>userAuth()}>sing in</div>
           <div className="cart border" onClick={()=>userAuth()}>

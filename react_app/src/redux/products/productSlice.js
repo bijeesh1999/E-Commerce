@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getProducts,getProductById,postProduct,deleteProductById } from "./productApi";
+import { getProducts,getProductById,postProduct,deleteProductById, editProduct } from "./productApi";
 
 const initialState = {
     products: [],
     singleProduct:[],
     postProduct:[],
+    updatedData:[],
+    delete:[],
     status: 'idle',
 };
 
@@ -52,15 +54,27 @@ const productSlice = createSlice({
 
     // ======================================================================
 
-    //         .addCase(deleteCategoryById.pending, (state) => {
-    //             state.status = "Loading";
-    //         })
-    //         .addCase(deleteCategoryById.fulfilled, (state, action) => {
-    //             state.deleteCategoryById = action.payload;
-    //         })
-    //         .addCase(deleteCategoryById.rejected, (state) => {
-    //             state.status = "Failed";
-    //         })
+            .addCase(deleteProductById.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(deleteProductById.fulfilled, (state, action) => {
+                state.delete = action.payload;
+            })
+            .addCase(deleteProductById.rejected, (state) => {
+                state.status = "Failed";
+            })
+
+    // =================================================================
+
+            .addCase(editProduct.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(editProduct.fulfilled, (state, action) => {
+                state.updatedData = action.payload;
+            })
+            .addCase(editProduct.rejected, (state) => {
+                state.status = "Failed";
+            })
     },
 });
 

@@ -76,19 +76,29 @@ const getOneProductById=async (req,res)=>{
 
 const updateProductById= async(req,res)=>{
   const {id}=req.params;
-  const {mrp,discount}=req.body;
-  try {
-    if(!id || !mrp || !discount){
-      res.status(400).json("id is not found")
-    }else{
-      console.log(id,mrp,discount);
-      let putProductById=await product.findByIdAndUpdate(id,req.body)
-      res.status(200).json(putProductById)
+  const {...data}=req.body;
+  const images = req.files.map(file => file.filename);
+
+  const oldImg=await product.findById(id);
+  let oldimgs=oldImg.images.map((data)=>data)
+
+    let putProductById;
+    if (!req.files || req.files.length <= 0 ) {
+
+      putProductById = await product.findByIdAndUpdate(id, {
+        data,
+        images:oldimgs
+      } );
+
+    }else {
+      let newData={
+        data,images
+      }
+      putProductById = await product.findByIdAndUpdate(id, newData );
     }
-    
-  } catch (error) {
-    res.status(500).json("server error")
-  }
+
+    res.status(200).json(putProductById);
+
     
 }
 

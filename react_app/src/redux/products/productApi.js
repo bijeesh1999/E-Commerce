@@ -25,6 +25,8 @@ export const getProductById = createAsyncThunk(
     },
 );
 
+// ============================================================================
+
 export const postProduct = createAsyncThunk(
     'postProduct',
     async (formData) => {
@@ -35,11 +37,25 @@ export const postProduct = createAsyncThunk(
     },
 );
 
-// export const deleteProductById = createAsyncThunk(
-//     'deleteCategoryById',
-//     async () => {
-//         const res = await axios.get(`http://localhost:8086/products/${id}`);
-//         console.log(res);
-//         return res.data;
-    // },
-// );
+// ================================================================================
+
+export const deleteProductById = createAsyncThunk(
+    'deleteProductById',
+    async (id) => {
+            const res = await axios.delete(`http://localhost:8086/products/${id}`);
+            console.log(res);
+            return res.data;
+    },
+);
+
+// ===================================================================================
+
+
+export const editProduct = createAsyncThunk(
+    'editProduct',
+    async (id,data) => {
+        const res = await axios.put(`http://localhost:8086/products/${id}`,data);
+        console.log(res);
+        return res.data;
+    },
+);

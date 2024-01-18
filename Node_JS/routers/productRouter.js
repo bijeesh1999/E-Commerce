@@ -13,7 +13,7 @@ Router.route("/")
   .post(upload, createProduct)
 Router.route("/:id")
   .get(getOneProductById)
-  .put(updateProductById)
+  .put(upload , updateProductById)
   .delete(deleteProductsById)
 
 

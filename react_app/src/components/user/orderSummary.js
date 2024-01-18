@@ -24,7 +24,7 @@ function OrderSummary(){
         setOrderData(oneOrder.data?.cartData);
         setDetails(oneOrder?.data);
     },[oneOrder])
-    // console.log(oneOrder.data.cartData);
+    console.log(oneOrder.data);
 
 
     // ==================================================================
@@ -98,7 +98,7 @@ function OrderSummary(){
                         <h4>{data.Description}</h4>
                         <h3>{data.categoryName}</h3>
                         <div className="total">
-                            <h3 style={{textAlign:"end"}}>{data.mrp - data.discount}</h3>
+                            <h3 style={{textAlign:"end"}}>Amount : {data.mrp - data.discount}</h3>
                         </div>
                     </div>
                 </div>
@@ -130,8 +130,8 @@ function OrderSummary(){
                         </div>
                     </div>
                     <div className="total">
-                        <h3>{details?.createdAt}</h3>
-                        <h3>{details?.totalAmount}</h3>
+                        <h3>Order Date : {details?.createdAt?.split("T")[0]}</h3>
+                        <h3>Total Amount : {details?.totalAmount}</h3>
                     </div>
                 </div>
             <footer>

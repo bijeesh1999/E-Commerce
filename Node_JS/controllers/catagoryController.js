@@ -64,10 +64,7 @@ const deleteCategogyById= async (req,res)=>{
     if(!id){
         res.status(400).json("id is not found")
       }else{
-        let deleteById=await category.findByIdAndUpdate(id,{
-            isDeleted:false
-        },{ new: true });
-
+        let deleteById=await category.findByIdAndDelete(id);
         res.status(200).json(deleteById)
       }
 

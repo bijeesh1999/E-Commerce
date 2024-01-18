@@ -3,7 +3,8 @@
     #container{
         max-width: 1100px;
         margin: auto;
-        background-color: aqua;
+        border: 1px solid grey;
+        border-radius: 10px;
         margin-top:2rem;
         margin-bottom: 2rem;
         padding: 10px 0;
@@ -11,7 +12,6 @@
         .products{
             width: 100%;
             height: 8rem;
-            background-color: azure;
             display: flex;
             gap: 10px;
             padding-right: 1em;
@@ -20,6 +20,7 @@
             .img{
                 width: 8em;
                 height: 100%;
+                border: 1px solid gray;
                 img{
                     width: 100%;
                     height: 100%;
@@ -29,6 +30,12 @@
             .details{
                 flex: 1;
                 display: grid;
+                h3{
+                    font-size: unset;
+                }
+                h4{
+                    font-size: unset;
+                }
             }
         }
         footer{
@@ -61,6 +68,9 @@
         display: flex;
         justify-content: space-between;
         padding: 5px 10px;
+        h3{
+            font-size: unset;
+        }
         .status{
             background-color: greenyellow;
             padding: 5px 10px;
@@ -83,4 +93,7 @@
 
 .Details{
     padding-left: 5rem;
+    h3,h4{
+        font-size: unset;
+    }
 }

@@ -99,6 +99,7 @@ button{
                     .buttons{
                         display: flex;
                         justify-content: space-between;
+                        font-size: 10px;
                         .button{
                             width: 5rem;
                         }
@@ -107,6 +108,7 @@ button{
                 .addCategory{
                     width: 3rem;
                     padding: 5px 10px;
+                    font-size: 10px;
                 }
                 #close{
                     font-weight: 800;

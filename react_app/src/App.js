@@ -10,6 +10,8 @@ import SellerPage from "./components/seller/sellerPage";
 import SuperAdmin from "./components/superAdmin/superAdminPannel";
 import AllProuct from "./components/superAdmin/allProducts";
 import OrderSummary from "./components/user/orderSummary";
+import SellerProducts from "./components/seller/sellerProducts";
+import MyOrder from "./components/user/myOrderHistory";
 import "./App.css";
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
           <Route path="/superAdmin" element={<SuperAdmin />} />
           <Route path="/allProduct" element={<AllProuct />} />
           <Route path="/OrderSummary/:id" element={<OrderSummary />} />
+          <Route path="/myProducts" element={<SellerProducts/>} />
+          <Route path="/MyOrder" element={<MyOrder />} />
         </Routes>
       </BrowserRouter>
     </div>

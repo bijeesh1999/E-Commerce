@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import DeleteModal from "../deleteConfirm";
 import { deleteCategoryById , getCategories , postCategoryData , updateCategory} from "../../redux/category/categoryApi";
 import "./superAdmin.css"
 
@@ -69,7 +70,8 @@ function CategoryModal(props) {
     {category?.map((data , index)=>(    
     <tr key={index}>
       <td>{data.categoryName}</td>
-      <td className="actions"><i className="fa-solid fa-trash" onClick={()=>deleteCategory(data._id)}></i>
+      <td className="actions">
+      <DeleteModal id={data._id}/>
       <i className="fa-solid fa-pen-to-square" onClick={()=>editCategory(data)}></i>
       </td>
     </tr>
@@ -77,7 +79,7 @@ function CategoryModal(props) {
   </tbody>
       </table>
       <div style={{display:"flex", justifyContent:"flex-end" , width:"100%"}}>
-      <button id="close" onClick={()=>{setForm(false)}}>X</button>
+      <button id="close" onClick={()=>{setForm(false)}}><i className="material-symbols-outlined">close</i></button>
       </div>
     </div>
   );

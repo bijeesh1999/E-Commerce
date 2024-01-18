@@ -36,11 +36,8 @@ export const postCategoryData = createAsyncThunk(
 export const deleteCategoryById = createAsyncThunk(
     'deleteCategoryById',
     async (id) => {
-        const confirm=window.confirm("delete this !");
-        if(confirm){
             const res = await axios.delete(`http://localhost:8086/categories/${id}`);
             console.log(res);
             return res.data;
         }
-    },
 );
