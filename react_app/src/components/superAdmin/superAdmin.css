@@ -2,8 +2,8 @@ table {
     /* border: 2px solid forestgreen; */
     width: 100%;
     width: 23rem;
-    .actions{
-        display: flex;
+    .categoryAction{
+        display: flex !important;
         align-items: center;
         justify-content: space-around;
         font-size: 24px;
@@ -96,12 +96,13 @@ button{
                         padding: 5px 7px;
                         font-size: 13px;
                     }
-                    .buttons{
+                    .categorybuttons{
                         display: flex;
                         justify-content: space-between;
                         font-size: 10px;
                         .button{
-                            width: 5rem;
+                            width: 5rem !important;
+                            border: none;
                         }
                     }
                 }

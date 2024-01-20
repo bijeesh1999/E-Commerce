@@ -12,6 +12,7 @@ import AllProuct from "./components/superAdmin/allProducts";
 import OrderSummary from "./components/user/orderSummary";
 import SellerProducts from "./components/seller/sellerProducts";
 import MyOrder from "./components/user/myOrderHistory";
+import EditProduct from "./components/seller/editProduct";
 import "./App.css";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/OrderSummary/:id" element={<OrderSummary />} />
           <Route path="/myProducts" element={<SellerProducts/>} />
           <Route path="/MyOrder" element={<MyOrder />} />
+          <Route path="/editOneProduct/:id" element={<EditProduct />} />
         </Routes>
       </BrowserRouter>
     </div>

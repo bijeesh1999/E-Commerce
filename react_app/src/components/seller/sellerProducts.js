@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSelector , useDispatch } from "react-redux";
 import { getProducts,deleteProductById } from "../../redux/products/productApi";
 import DeleteModal from "../deleteConfirm";
@@ -7,6 +8,7 @@ import "./sellerProduct.css"
 
 function SellerProducts(){
     const dispatch=useDispatch();
+    const navigate=useNavigate();
 
     useEffect(()=>{
         dispatch(getProducts())
@@ -34,7 +36,7 @@ function SellerProducts(){
                 <div className="actions">
                 {/* <i className="fa-solid fa-trash" onClick={()=>deleteProduct(data._id)}></i> */}
                 <DeleteModal id={data._id}/>
-                <i className="fa-solid fa-pen-to-square"></i>
+                <i className="fa-solid fa-pen-to-square" onClick={()=>navigate(`/editOneProduct/${data._id}`)}></i>
                 </div>
             </div>
             <div className="details">

@@ -55,7 +55,7 @@ function Header() {
         <div id="cartAndSign">
         <div className="seller border" onClick={()=>myOrder()}>my-Order</div>
         <div className="seller border" onClick={()=>sellerAuth()}>Become a seller</div>
-          <div className="signup border" onClick={()=>userAuth()}>sing in</div>
+          <div className="signup border" onClick={()=>userAuth()}>sign in</div>
           <div className="cart border" onClick={()=>userAuth()}>
             <span>{cartData}</span>
             <i className="material-symbols-outlined">remove_shopping_cart</i>Cart

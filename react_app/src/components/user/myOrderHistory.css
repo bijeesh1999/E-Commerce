@@ -1,0 +1,45 @@
+
+.container{
+    padding: 1rem 0 ;
+    display: grid;
+    gap: 2rem;
+}
+.orderHistory{
+    border: 1px solid;
+    .orderinfo{
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 10px 0;
+        border-bottom: 1px solid gray;
+
+    }
+    .orderinfo{
+        text-align: center;
+    }
+    .products{
+        display: flex;
+        gap: 10px;
+        border-bottom: 1px solid grey;
+        .img{
+            width: 7rem;
+            height: 7rem;
+            border-right: 1px solid gray;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+            }
+        }
+        .productdet{
+            display: grid;
+            gap: 5px;
+            flex: 1;
+            padding-right: 10px;
+            .id{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                text-align: end;
+            }
+        }
+    }
+}

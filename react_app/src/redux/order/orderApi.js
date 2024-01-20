@@ -26,3 +26,16 @@ export const getOneOrder=createAsyncThunk("getOneOrder",
             console.log("no such data found");
         }   
 })
+
+
+export const getMyOrderHistory=createAsyncThunk("getMyOrderHistory",
+
+    async (id)=>{
+        const myOrderHistory = await axios.get(`http://localhost:8086/order/userOrder/${id}`)
+        if(myOrderHistory){
+            return myOrderHistory.data;
+        }
+        else{
+            console.log("no such data found");
+        }   
+})

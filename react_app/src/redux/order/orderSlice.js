@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllOrder,getOneOrder } from "./orderApi";
+import { getAllOrder,getOneOrder, getMyOrderHistory } from "./orderApi";
 
 const initialState = {
     allOrder: [],
     singleOrder:[],
+    orderHistory:[],
     status: 'idle',
 };
 
@@ -48,6 +49,19 @@ const orderSlice = createSlice({
             // .addCase(deleteCategoryById.rejected, (state) => {
             //     state.status = "Failed";
             // })
+
+        // ===============================================================
+
+        .addCase(getMyOrderHistory.pending, (state) => {
+            state.status = "Loading";
+        })
+        .addCase(getMyOrderHistory.fulfilled, (state, action) => {
+            state.orderHistory = action.payload;
+
+        })
+        .addCase(getMyOrderHistory.rejected, (state) => {
+            state.status = "Failed";
+        })
     },
 });
 

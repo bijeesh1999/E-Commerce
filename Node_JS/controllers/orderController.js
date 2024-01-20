@@ -1,4 +1,5 @@
-const order = require ("../mongoDb/models/orderSchema")
+const order = require ("../mongoDb/models/orderSchema");
+const { db } = require("../mongoDb/models/productSchema");
 
 
 const getAllOrder=async (req,res) => {
@@ -21,4 +22,18 @@ const getOneOrder= async (req,res) => {
     }
 }
 
-module.exports={getAllOrder , getOneOrder}
+
+const getOrderByUser= async (req,res) => {
+
+    const {id}=req.params;
+    console.log(id);
+
+    const result=await order.aggregate([
+        { $match: { userId: id } },
+      ])
+
+      res.status(200).json(result)
+
+}
+
+module.exports={getAllOrder , getOneOrder, getOrderByUser}

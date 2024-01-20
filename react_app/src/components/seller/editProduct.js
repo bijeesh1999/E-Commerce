@@ -1,0 +1,181 @@
+import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { editProduct, getProductById } from "../../redux/products/productApi";
+import { getCategories } from "../../redux/category/categoryApi";
+import { useParams } from "react-router-dom";
+import "./editProduct.css"
+
+function EditProduct() {
+  const dispatch = useDispatch();
+  const id = useParams();
+  const [prevImg , setPrevImg]=useState([0])
+  const [product, setProduct] = useState({
+    ProductName: "",
+    Quantity: "",
+    Description: "",
+    categoryName: "",
+    Fetures: "",
+    discount: "",
+    mrp: "",
+  });
+  const [fileImage,setFileImage]=useState([])
+
+
+  // console.log(fileImage);
+  let array=[]
+  // console.log(array);
+
+    for(let img of fileImage){
+      const dataURL =  readFileAsDataURL(img);
+      array.push(dataURL)
+    }
+
+    console.log(array);
+
+
+  useEffect(() => {
+    dispatch(getProductById(id.id));
+    dispatch(getCategories());
+  }, [dispatch, id]);
+
+  const data = useSelector((state) => state.product?.singleProduct);
+  const categorys = useSelector((state) => state.category.categories);
+  useEffect(() => {
+    setProduct(data);
+  }, [data]);
+
+  // console.log(product);
+
+  const editing = (e) => {
+    setProduct((prevProduct) => ({
+      ...prevProduct,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const newFiles=(e)=>{
+    setFileImage(
+       e.target.files 
+    );
+
+  }
+
+
+  const submitEditForm=(e)=>{
+    e.preventDefault();
+    const formData=new FormData();
+
+    formData.append("ProductName",product.ProductName)
+    formData.append("Quantity",product.Quantity)
+    formData.append("Description",product.Description)
+    formData.append("categoryName",product.category)
+    formData.append("Fetures",product.Fetures)
+    formData.append("discount",product.discount)
+    formData.append("mrp",product.mrp)
+    for (let data of fileImage) {
+      formData.append("images",data)
+    }
+    dispatch(editProduct({id:id.id,formData}))
+  }
+
+
+  return (
+    <div className="editWraper">
+      <div className="editContainer">
+        <div className="productPrevew">
+          <div className="productImg">
+            <div className="allimg">
+              {product?.images?.map((img , index)=>(
+             <img src={`http://localhost:8086/uploads/${img}`} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
+              ))}
+            </div>
+            <div className="mainimg">
+            {Array.isArray(product.images) && product.images.length > 0 && (
+            <img src={`http://localhost:8086/uploads/${product.images[prevImg]}`} className="singleimg" />
+            )}
+
+            </div>
+          </div>
+          <div className="aboutProduct">
+            <h3 className="productName">Name : {product.ProductName}</h3>
+            <h5 className="description">Desc.. : {product.Description}</h5>
+            <h4 className="conpany">Conpany : {product.categoryName}</h4>
+            <div className="priceDetails">
+              <h4 className="mrp">MRP : {product.mrp}</h4>
+              <h4 className="discount">Discount : {product.discount}</h4>
+            </div>
+          </div>
+        </div>
+        <div className="productEditForm">
+          <form className="editForm" encType="multipart/form-data" onSubmit={submitEditForm}>
+            <input
+              type="name "
+              name="ProductName"
+              placeholder="productName"
+              value={product?.ProductName}
+              onChange={editing}
+            />
+            <input
+              type="text"
+              name="Quantity"
+              placeholder="Quantity"
+              value={product?.Quantity}
+              onChange={editing}
+            />
+            <input
+              type="file"
+              id="files"
+              name="files"
+              multiple
+              onChange={newFiles}
+            />
+            <textarea
+              type="text"
+              name="Description"
+              placeholder="desc...."
+              value={product?.Description}
+              onChange={editing}
+            />
+            <select id="categories" name="category" required onChange={editing}>
+              {categorys?.map((category, index) => (
+                <option
+                  key={index}
+                  selected={ product?.categoryName === category.categoryName}
+                >
+                  {category.categoryName}
+                </option>
+              ))}
+            </select>
+            <input
+              type="text"
+              name="Fetures"
+              placeholder="Fetures"
+              value={product?.Fetures}
+              onChange={editing}
+            />
+            <input
+              type="text"
+              name="discount"
+              placeholder="discount"
+              value={product?.discount}
+              onChange={editing}
+            />
+            <input
+              type="text"
+              name="mrp"
+              placeholder="mrp"
+              value={product.mrp}
+              onChange={editing}
+            />
+            <div className="buttons">
+            <input type="submit" className="button" />
+              <button onClick={''} className="button">close</button> 
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default EditProduct;

@@ -54,9 +54,9 @@ function CategoryModal(props) {
         <button className="addCategory" onClick={()=>addModal()}>Add</button>
         {form ? <form >
         <input type="test" name="categoryName" value={add.categoryName} onChange={handleSubmit} />
-        <div className="buttons">
+        <div className="categorybuttons">
         {button? <input type="submit" value="edit" className="button" onClick={editData}/> :<input type="submit" className="button" value="submit"onClick={addCategory} />}
-        <button className="button" onClick={()=>{setForm(false)}}>cancel</button>
+        <button className="button" onClick={()=>{props.setForm(false)}}>cancel</button>
         </div>
         </form> : null}
       <table>
@@ -70,7 +70,7 @@ function CategoryModal(props) {
     {category?.map((data , index)=>(    
     <tr key={index}>
       <td>{data.categoryName}</td>
-      <td className="actions">
+      <td className="categoryAction">
       <DeleteModal id={data._id}/>
       <i className="fa-solid fa-pen-to-square" onClick={()=>editCategory(data)}></i>
       </td>

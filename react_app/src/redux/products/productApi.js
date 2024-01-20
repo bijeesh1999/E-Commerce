@@ -18,8 +18,8 @@ export const getProductById = createAsyncThunk(
         if (!id) {
             return 0
         }
-        const res = await axios.get(`http://localhost:8086/products/${id}`);
-        return res.data;
+        const getOneData = await axios.get(`http://localhost:8086/products/${id}`);
+        return getOneData.data;
         // console.log(res.data);
 
     },
@@ -31,9 +31,9 @@ export const postProduct = createAsyncThunk(
     'postProduct',
     async (formData) => {
         console.log(formData);
-        const res = await axios.post(`http://localhost:8086/products`,formData);
-        console.log(res.data);
-        return res.data;
+        const newData = await axios.post(`http://localhost:8086/products`,formData);
+        console.log(newData.data);
+        return newData.data;
     },
 );
 
@@ -53,9 +53,12 @@ export const deleteProductById = createAsyncThunk(
 
 export const editProduct = createAsyncThunk(
     'editProduct',
-    async (id,data) => {
-        const res = await axios.put(`http://localhost:8086/products/${id}`,data);
-        console.log(res);
+    async ({id,formData}) => {
+        // const {id , formData}=data
+        // console.log("+++",id);
+        // console.log(formData);
+        const res = await axios.put(`http://localhost:8086/products/${id}`,formData);
+        // console.log(res);
         return res.data;
     },
 );
