@@ -30,13 +30,16 @@ const getSellerById = async (req,res) => {
 const postSeller = async (req,res) => {
 
     const {userName,emailId,password}=await req.body;
-    console.log(req.body);
+    console.log("seller:",req.body);
     if(!userName,!emailId,!password){
-        res.status(201).json("seller is not found");
+        res.status(201).json("fields are mandatory");
+        console.log("fields are mandatory");
+        return;
     }
     // const emailId=sellerData.emailId;
     const uservlid = await seller.findOne({emailId});
     if(uservlid){
+        console.log("user already registered");
         return res.status(201).json("user already registered")
     }
     else{

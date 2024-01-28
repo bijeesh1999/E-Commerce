@@ -9,17 +9,17 @@
   }
   .sellingForm {
     display: flex;
-    width: 40%;
-    padding: 2rem;
+    width: 30%;
+    padding: 1rem 2rem;
     flex-wrap: wrap;
     gap: 1rem;
     border-radius: 5px;
     box-shadow: 0px 0px 15px #cacccd;
     background-color: white;
-    position: absolute;
+    position: fixed;
     z-index: 2;
-    top: -30px;
-    left: calc(50% - 20%);
+    top: 10px;
+    left: calc(50% - 15%);
     >input,textarea{
       padding: 10px;
       font-size: 15px;
@@ -71,9 +71,56 @@
 
 #overlay{
   width: 100%;
-  min-height: 120vh;
+  min-height: 100%;
   background-color: black;
   opacity: .4;
-  position: absolute;
+  position: fixed;
   top: 0;
+}
+
+.sellerWrapper {
+
+  background-color: aliceblue;
+  .sellerProductContainer {
+    max-width: 1200px;
+    margin: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    .singleProducts {
+      width: 18rem;
+      background-color: white;
+      padding: 10px;
+      display: grid;
+      align-items: center;
+      margin-bottom: 1rem;
+      .productImage{
+        width: 100%;
+    height: 15rem;
+    position: relative;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+      }
+    }
+  }
+}
+
+
+.actions{
+    display: flex;
+    width: 4rem;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;    
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    color: white;
 }

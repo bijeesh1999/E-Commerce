@@ -15,33 +15,38 @@ function Header() {
   const [sellerlogin,setSellerLogin]=useState(false)
 
   const userId=useSelector((state)=>state.user.id)
+  const userToken=useSelector((state)=>state.user.token)
 
 
-  useEffect(()=>{
+  if(userToken){
     dispatch(getUsersById(userId))
-  },[dispatch])
+  }
 
   const cartData=useSelector((state)=>state.user.getSingle.cart?.length)
+  const isSeller=useSelector((state)=>state.seller.sellerToken)
+
+  // console.log(isSeller);
 
   // console.log(cartData?.length);
 
   const sellerAuth=()=>{
-    // if(sessionStorage.cookie){
+    if(isSeller){
       navigate("/adminSelling")
-    // }else{
-    //   setSellerLogin(true)
-    // }
+    }else{
+      setSellerLogin(true)
+    }
   }
+  
     const userAuth=()=>{
-    // if(cartData.token){
-      navigate("/cart")
-    // }else{
-    //   setLogin(true)
-    // }
+      // navigate("/cart")
   }
 
   const myOrder = () =>{
-    navigate("/MyOrder")
+    if(userToken){
+      navigate("/MyOrder")
+    }else{
+      setLogin(true)
+    }
   }
 
 
@@ -62,8 +67,8 @@ function Header() {
           </div>
         </div>
       </header>
-      {login ? <LoginUser overlay={login}/>:null}
-      {sellerlogin ? <LoginSeller overlay={sellerlogin}/>:null}
+      {login ? <LoginUser overlay={login} setLogin={setLogin}/>:null}
+      {sellerlogin ? <LoginSeller overlay={sellerlogin} setSellerLogin={setSellerLogin} />:null}
     </React.Fragment>
   );
 }

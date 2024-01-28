@@ -10,6 +10,7 @@ const userLogin = async (req,res) => {
     if(!(emailId,password)){
 
         res.status(201).json("emailid and passwod is required")
+        return;
 
     }
     const userValid = await user.findOne({emailId});

@@ -13,7 +13,7 @@ function OrderSummary(){
     const [details,setDetails]=useState()
     const dispatch=useDispatch();
     const {id}=useParams();
-    console.log(id);
+    // console.log(id);
 
     useEffect(()=>{
         dispatch(getOneOrder(id))

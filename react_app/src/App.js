@@ -10,15 +10,51 @@ import SellerPage from "./components/seller/sellerPage";
 import SuperAdmin from "./components/superAdmin/superAdminPannel";
 import AllProuct from "./components/superAdmin/allProducts";
 import OrderSummary from "./components/user/orderSummary";
-import SellerProducts from "./components/seller/sellerProducts";
 import MyOrder from "./components/user/myOrderHistory";
 import EditProduct from "./components/seller/editProduct";
+import AllUserList from "./components/superAdmin/allUsers";
+import AllCategorieList from "./components/superAdmin/allCategorie";
+import AllSellerList from "./components/superAdmin/allSellerse";
+import AllOrder from "./components/superAdmin/allOrder";
+
+
+// import User from "./User";
+// import Seller from "./Seller";
+// import MainAdmin from "./MainAdmin";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
       <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/product/:id" element={<SingleProduct />} />
+          <Route path="/success/:id" element={<ByProduct />} />
+          <Route path="/singleCategory/:id" element={<SingleCategory />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="*" element={<ByProduct />} />
+          <Route path="/OrderSummary/:id" element={<OrderSummary />} />
+          <Route path="/MyOrder" element={<MyOrder />} />
+
+          <Route path="/adminSelling" element={<SellerPage />} />
+          <Route path="/editOneProduct/:id" element={<EditProduct />} />
+
+          <Route path="/superAdmin" element={<SuperAdmin />} />
+          <Route path="/allProduct" element={<AllProuct />} />
+          <Route path ="/allUser" element={<AllUserList />} />
+          <Route path="/allCategory" element={<AllCategorieList />} />
+          <Route path="/allSellers" element={<AllSellerList />} />
+          <Route path="/allOrderList" element={<AllOrder />} />
+
+        </Routes>
+      </BrowserRouter>
+  );
+}
+
+export default App;
+
+      {/* <BrowserRouter>
         <Header />
         <Routes>
           <Route index element={<Home />} />
@@ -35,9 +71,11 @@ function App() {
           <Route path="/MyOrder" element={<MyOrder />} />
           <Route path="/editOneProduct/:id" element={<EditProduct />} />
         </Routes>
-      </BrowserRouter>
-    </div>
-  );
-}
+      </BrowserRouter> */}
 
-export default App;
+
+    //   <div className="App">
+    //   <User />
+    //   {/* <Seller /> */}
+    //   <MainAdmin />
+    // </div>

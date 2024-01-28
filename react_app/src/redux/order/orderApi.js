@@ -7,7 +7,7 @@ export const getAllOrder=createAsyncThunk("getAllOrder",
     async ()=>{
         const allOrdr = await axios.get("http://localhost:8086/order")
         if(allOrdr){
-            return allOrdr;
+            return allOrdr.data;
         }
         else{
             console.log("no such data found");
@@ -18,8 +18,10 @@ export const getAllOrder=createAsyncThunk("getAllOrder",
 export const getOneOrder=createAsyncThunk("getOneOrder",
 
     async (id)=>{
+        console.log(id);
         const singleOrdr = await axios.get(`http://localhost:8086/order/${id}`)
         if(singleOrdr){
+            // console.log(singleOrdr);
             return singleOrdr;
         }
         else{

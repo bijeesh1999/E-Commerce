@@ -10,6 +10,8 @@ const sellerLogin = async(req,res) =>{
     const {emailId,password}= await req.body;
     if(!(emailId,password)){
         res.status(201).json("data is required");
+        console.log("data is required");
+        return;
     }
     const sellerValid=await seller.findOne({emailId});
     console.log(sellerValid);
@@ -32,6 +34,7 @@ const sellerLogin = async(req,res) =>{
 
     }else{
         res.status(201).json("no user found please register")
+        console.log("no user found please register");
     }
 
 }

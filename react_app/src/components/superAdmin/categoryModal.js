@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import {useDispatch } from "react-redux";
 import DeleteModal from "../deleteConfirm";
-import { deleteCategoryById , getCategories , postCategoryData , updateCategory} from "../../redux/category/categoryApi";
+import { postCategoryData , updateCategory , getCategories} from "../../redux/category/categoryApi";
 import "./superAdmin.css"
 
 function CategoryModal(props) {
-  console.log(props);
+  const navigate=useNavigate();
   const [form , setForm]=useState(false)
 
   const [add,setAdd]=useState({
@@ -15,12 +16,6 @@ function CategoryModal(props) {
     const dispatch=useDispatch();
     const category=props.categorie;
 
-    // console.log(add);
-
-    const deleteCategory=async (id)=>{
-        dispatch(deleteCategoryById(id))
-        await getCategories()
-    }
     const editCategory=(data)=>{
         console.log(data);
         setButton(true)
@@ -37,28 +32,45 @@ function CategoryModal(props) {
       [e.target.name]: e.target.value 
     })
   }
-  const addCategory=(e)=>{
+  const addCategory=async(e)=>{
     e.preventDefault();
     dispatch(postCategoryData(add))
+    setTimeout(() => {
+      dispatch(getCategories())
+      setForm(false)
+      setAdd("")
+    }, 200);
+    
   }
 
-  const editData = (e) => {
+  const editData = async (e) => {
     e.preventDefault();
     dispatch(updateCategory(add));
+    setTimeout(() => {
+      dispatch(getCategories())
+    }, 200);
     setForm(false)
-
   };
+
+  const closeForm=async(e)=>{
+    setAdd("")
+    setForm(false)
+  }
 
   return (
     <div id="categoryModal">
+      <div className="addButton">
         <button className="addCategory" onClick={()=>addModal()}>Add</button>
+      </div>
+        <div id="categoryForm">
         {form ? <form >
-        <input type="test" name="categoryName" value={add.categoryName} onChange={handleSubmit} />
+        <input type="test" name="categoryName" value={add.categoryName} onChange={handleSubmit} required />
         <div className="categorybuttons">
-        {button? <input type="submit" value="edit" className="button" onClick={editData}/> :<input type="submit" className="button" value="submit"onClick={addCategory} />}
-        <button className="button" onClick={()=>{props.setForm(false)}}>cancel</button>
+        {button? <button type="submit" value="edit" className="button" onClick={editData}>Submit</button> :<button type="submit" className="button" value="submit"onClick={addCategory} >submit</button>}
+        <button className="button" onClick={closeForm}>cancel</button>
         </div>
         </form> : null}
+        </div>
       <table>
       <thead>
     <tr>
@@ -79,7 +91,6 @@ function CategoryModal(props) {
   </tbody>
       </table>
       <div style={{display:"flex", justifyContent:"flex-end" , width:"100%"}}>
-      <button id="close" onClick={()=>{setForm(false)}}><i className="material-symbols-outlined">close</i></button>
       </div>
     </div>
   );

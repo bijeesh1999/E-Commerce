@@ -1,28 +1,42 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react"; 
+import { useNavigate } from "react-router-dom";
+import { useSelector , useDispatch } from "react-redux";
+import { userRegister } from "../../redux/userAuth/userApi";
 import "./user.css";
 
 
-function UserRegister({setRegister}){
+function UserRegister(props){
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   const [data,setData]=useState();
+  const [error , setError]=useState("");
 
   const handleChange=(e)=>{
     setData({
       ...data,
       [e.target.name]:e.target.value
     })
-
   }
 
   const registerUser=async (e)=>{
     e.preventDefault();
-    const res=await axios.post("http://localhost:8086/user/register",data) 
-    console.log(res);
+    dispatch(userRegister(data))
   }
 
+  const userAuth=useSelector((state)=>state.user.userRegister)
+  useEffect(()=>{
+    if(userAuth.status == 201){
+      setError(userAuth.data)
+    }
+    else if(userAuth.status == 200){
+      navigate("/MyOrder")
+      setTimeout(() => {
+        props.setLogin(false)
+      }, 200);
+    }
+  },[userAuth])
       return (
         <div id="userRegister">
-          <span>UserRegister</span>
         <form onSubmit={registerUser}>
         <div className="input-container">
             <label>userName</label>
@@ -30,18 +44,21 @@ function UserRegister({setRegister}){
           </div>
           <div className="input-container">
             <label>emailId </label>
-            <input type="text" name="emailId" required onChange={handleChange} placeholder="userName"/>
+            <input type="text" name="emailId"  onChange={handleChange} placeholder="userName"/>
           </div>
           <div className="input-container">
             <label>Password </label>
-            <input type="password" name="password" required onChange={handleChange} placeholder="userName"/>
+            <input type="password" name="password"  onChange={handleChange} placeholder="userName"/>
           </div>
           <div className="button-container">
             <input type="submit" />
           </div>
         </form>
         <div className="instructions">
-          <button onClick={()=>setRegister(false)}>close</button>
+          <span>UserRegister</span>
+          <div className="image">image</div>
+          <div className="validation">{error}</div>
+          <button onClick={()=>props.setRegister(false)}>login ?</button>
         </div>
         </div>
       );

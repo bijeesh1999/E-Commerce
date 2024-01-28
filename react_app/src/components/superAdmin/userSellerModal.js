@@ -1,43 +1,37 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function UserSeller(props) {
-  const [user,setUser]=useState();
-  const [seller,setSeller]=useState()
-  const [data,setData]=useState()
+  const navigate=useNavigate()
+  const [userOrSeller,setUserOrSeller]=useState();
 
-
-  console.log(data);
  useEffect(()=>{
-  if(props.users){
-    setData(props.users)
-  }
-  if(props.sellers){
-    setData(props.sellers)
-  }
+  setUserOrSeller(props.data)
  },[props])
 
 
   return (
-    <>
+    <div className="userSellerWraper">
       <table id="list">
-        <caption>DataTable</caption>
         <thead>
           <tr>
+            <th>siNo</th>
             <th>Name</th>
             <th>Email Id</th>
           </tr>
         </thead>
         <tbody>
-          {data?.map((data , index)=>(
+          {userOrSeller?.map((data , index)=>(
           <tr key={index}>
+            <td>{index + 1}</td>
             <td>{data.userName}</td>
             <td className="email">{data.emailId}</td>
           </tr>
           ))}
         </tbody>
-        <button className="close">close</button>
       </table>
-    </>
+        {/* <button className="close" onClick={()=>navigate("/superAdmin")}>close</button> */}
+    </div>
   );
 }
 

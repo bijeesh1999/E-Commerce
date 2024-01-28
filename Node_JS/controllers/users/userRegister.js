@@ -32,11 +32,13 @@ const postUser = async (req,res) => {
     const {userName,emailId,password}= req.body;
     console.log(req.body);
     if(!userName,!emailId,!password){
-        res.status(201).json("user is not found");
+        console.log("user is not found");
+        return res.status(201).json("some fields are mandatory");
     }
     const uservlid = await user.findOne({emailId});
     if(uservlid){
-        return res.status(201).json("user already registered plese use anotheer id");
+        console.log("user already registered");
+        res.status(201).json("user already registered");
     }
     else{
         const hashPassword= await bcrypt.hash(password,10);

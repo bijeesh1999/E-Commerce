@@ -1,43 +1,54 @@
 .editWraper{
-    background-color: gray;
+    /* background-color: gray; */
     min-height: 100vh;
     .editContainer{
         max-width: 1300px;
-        margin: auto;
+        margin-left: auto;
         display: flex;
+        justify-content: space-between;
         .productPrevew{
             width: 700px;
             display: grid;
         }
         .productEditForm{
-            width: 600px;
-            background-color: white;
+            width: 550px;
             border-radius: 7px;
-            box-shadow: 0px 0px 0px white;
+            box-shadow: 0px 18px 15px #d0cccc63;
             .editForm{
                 display: grid;
                 width: 100%;
                 padding: 2.5rem;
                 gap: 1rem;
-                >input{
-                    padding: 8px 5px;
-                    border:1px solid rgb(172, 178, 197);
-                    border-radius: 5px;
-                    outline: none;
+                background-color: white;
+
+                .inputContainer{
+                    display: grid;
+                    >label{
+                        font-size: 12px;
+                        font-weight: 700;
+                        font-family: revert;
+                    }
+                    >input{
+                        padding: 8px 5px;
+                        border:1px solid rgb(231, 231, 231);
+                        border-radius: 5px;
+                        outline: none;
+                    }
+                    >textarea{
+                        height: 5rem;
+                        border:1px solid rgb(172, 178, 197);
+                        border-radius: 5px;
+                        outline: none;
+                    }
+                    >select{
+                        width: 9rem;
+                        padding: 5px;
+                        border:1px solid rgb(172, 178, 197);
+                        border-radius: 5px;
+                        outline: none;
+                    }
                 }
-                >textarea{
-                    height: 5rem;
-                    border:1px solid rgb(172, 178, 197);
-                    border-radius: 5px;
-                    outline: none;
-                }
-                >select{
-                    width: 9rem;
-                    padding: 5px;
-                    border:1px solid rgb(172, 178, 197);
-                    border-radius: 5px;
-                    outline: none;
-                }
+
                 .buttons{
                     display: flex;
                     justify-content: space-between;
@@ -51,13 +62,15 @@
         }
 
         .productPrevew{
-            background-color: aqua;
+            /* background-color: aqua; */
             padding: 2rem;
             display: grid;
             gap: 1rem;
             .productImg{
                 display: flex;
                 gap: 10px;
+                padding: 10px 0;
+                border: 1px solid gainsboro;
                 .allimg{
                     width: 5rem;
                     background-color: white;
@@ -74,7 +87,6 @@
                 .mainimg{
                     width: 100%;
                     height: 27rem;
-                    background-color: bisque;
                     .singleimg{
                         width: 100%;
                         height: 100%;
@@ -90,6 +102,7 @@
                 padding: 10px 15px;
                 display: grid;
                 gap: 10px;
+                border: 1px solid gainsboro;
                 .productName,.conpany{
                     font-weight: 400;
                 }

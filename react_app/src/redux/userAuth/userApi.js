@@ -7,21 +7,28 @@ export const userLogin = createAsyncThunk("userLogin", async (login) => {
   console.log(login);
   const res = await axios.post("http://localhost:8086/user/login", login, {
     withCredentials: true,
-  });
-  localStorage.setItem("userToken",res.data.token)
-  localStorage.setItem("userId", res.data.userValid._id)
-  return res;
+  })
+  if(res.status == 201){
+    return {res:res.data , status:res.status}
+  }
+  else if(res.status == 200){
+    localStorage.setItem("userToken",res.data.token)
+    localStorage.setItem("userId", res.data.userValid._id)
+    return {res:res.data , status:res.status};
+  }
 });
 
 export const userRegister = createAsyncThunk(
   "userRegister",
   async (register) => {
     const res = await axios.post(
-      "http://localhost:8086/user/register",
-      register
-    );
-    if (res) {
-      return res;
+      "http://localhost:8086/user/register",register
+    )
+    if (res.status == 201){
+      return {data:res.data , status:res.status};
+    }
+    else if(res.status == 200){
+      return {data:res.data , status:res.status}
     }
   }
 );
@@ -42,8 +49,8 @@ export const updateUser = createAsyncThunk("updateUsers", async ({userId , produ
 
 
 export const getUsersById = createAsyncThunk("getUsersById", async (id) => {
+console.log(id);
   let res = await axios.get(`http://localhost:8086/user/${id}`);
-  // console.log(res);
   return res.data;
 });
 

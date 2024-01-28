@@ -28,7 +28,6 @@ const userSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, action) => {
         state.status = "success";
         state.loginedUser = action.payload;
-        console.log(action.payload);
       })
       .addCase(userLogin.rejected, (state) => {
         state.status = "failed";

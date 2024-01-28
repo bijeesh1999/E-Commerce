@@ -1,33 +1,43 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-const userToken = localStorage.getItem("sellerToken");
-let userId = localStorage.getItem("sellerId");
 
-export const sellerLogin = createAsyncThunk("sellerLogin", async (login) => {
-  const res = await axios.post("http://localhost:8086/seller/login", login, {
+
+export const sellerLogin = createAsyncThunk("sellerLogin", async (loginData) => {
+  const res = await axios.post("http://localhost:8086/seller/login", loginData, {
     withCredentials: true,
-  });
-  console.log(res);
-  localStorage.setItem("sellerToken", JSON.stringify(res.data.token));
-  localStorage.setItem("sellerId", JSON.stringify(res.data.sellerValid._id));
-  return res;
+  })
+  if(res.status == 201){
+    // console.log(res.data);
+    return {res:res.data , status:res.status}
+  }else{
+    localStorage.setItem("sellerToken", res.data.token);
+    localStorage.setItem("sellerId",res.data.sellerValid._id);
+    console.log(res);
+    return {res:res.data , status:res.status};
+  }
 });
+
+
 
 export const sellerRegister = createAsyncThunk(
   "sellerRegister",
-  async (register) => {
+  async (registerData) => {
     const res = await axios.post(
-      "http://localhost:8086/seller/register",register
+      "http://localhost:8086/seller/register",registerData
     );
-    if (res) {
-      return res;
+    // console.log(res);
+    if (res.status == 201) {
+      return {res:res.data , status:res.status};
+    }else{
+      return {res:res.data , status:res.status};
     }
   }
 );
 
+
+
 export const getSellers = createAsyncThunk("getAllSellers", async () => {
   let res = await axios.get("http://localhost:8086/seller");
-  // console.log(res);
   return res.data;
 });

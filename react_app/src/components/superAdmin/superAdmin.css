@@ -1,7 +1,32 @@
 table {
-    /* border: 2px solid forestgreen; */
-    width: 100%;
-    width: 23rem;
+    width: 500px;
+    margin: auto;
+    border: .2px solid grey;
+    background-color: white;
+    thead , tbody{
+        border: 1px solid rgb(221, 220, 220);
+        text-align: center;
+        tr:nth-child(even) {
+            background-color: rgb(247, 244, 244);
+        }
+        td,th{
+            padding: 15px 5px;
+    
+        }
+    }
+    thead{
+        background-color: #020221;
+    color: white;
+    }
+
+
+    tbody tr:hover{
+        background-color: rgb(7, 2, 49) !important;
+        color: white;
+    }
+    tbody .list{
+        cursor: pointer;
+    }
     .categoryAction{
         display: flex !important;
         align-items: center;
@@ -21,6 +46,7 @@ button{
 
 .wraper{
     display: flex;
+
     #menuBar{
         width: 250px;
         display: flex;
@@ -49,7 +75,7 @@ button{
                 opacity: .9;
                 background-color: rgba(190, 188, 188, 0.466);
                 opacity: .6;
-                
+                 
                 
             }
         }
@@ -59,7 +85,6 @@ button{
         flex-wrap: wrap;
         justify-content: space-around;
         flex: 1;
-        position: relative;
         padding-top: 1rem;
         .div{
             width: 200px;
@@ -75,77 +100,204 @@ button{
             border-radius: 5px;
             color: white;
             cursor: pointer;
-            #categoryModal {
-                position: absolute;
-                z-index: 10;
-                top: 2rem;
-                left: calc(50% - 18rem);
-                padding: 10px 15px;
-                background-color: aliceblue;
-                color: #08185d;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                border-radius: 5px;
-                form{
-                    display: grid;
-                    gap: 10px;
-                    padding: 10px 15px;
-                    background-color: rgb(45, 22, 175);
-                    input{
-                        padding: 5px 7px;
-                        font-size: 13px;
-                    }
-                    .categorybuttons{
-                        display: flex;
-                        justify-content: space-between;
-                        font-size: 10px;
-                        .button{
-                            width: 5rem !important;
-                            border: none;
-                        }
-                    }
-                }
-                .addCategory{
-                    width: 3rem;
-                    padding: 5px 10px;
-                    font-size: 10px;
-                }
-                #close{
-                    font-weight: 800;
-                    background: transparent;
-                    border: none;
-                }
-            }
         }
     }
-    #overlay{
+    /* #overlay{
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         background-color: rgb(79, 82, 82);
+    } */
+}
+
+
+/* =============================================================================================================== */
+#categoryModal {
+    width: 1200px;
+    margin: auto;
+    padding: 10px 15px;
+    color: #08185d;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 5px;
+
+    #categoryForm{
+        /* height: 6rem; */
+            form{
+                width: 600px;
+                margin-right: auto;
+                display: grid;
+                gap: 10px;
+                background-color: #eff4f8;
+                padding: 1rem 3rem;
+            border-radius: 5px;
+            box-shadow: 1px 4px 9px grey;
+                input{
+                    border: 0.5px solid rgb(160, 160, 160);
+                    border-radius: 5px;
+                    padding: 5px 7px;
+                    font-size: 13px;
+                    outline-color: #08185d;
+                }
+                .categorybuttons{
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 10px;
+                    .button{
+                        width: 5rem !important;
+                        border: none;
+                        background-color: rgb(131, 131, 136);
+                        color: white;
+                        font-size: 13px;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                    }
+                }
+            }
+    }
+    .addCategory{
+        width: 5rem;
+        padding: 7px 10px;
+        font-size: 14px;
+        border: none;
+        border-radius: 5px;
+        background-color: #b4b9b0;
+        float: right;
+    }
+    .addCategory:hover{
+        box-shadow: 0px 4px 10px #c8c3c3;
+    }
+    #close{
+        font-weight: 800;
+        background: transparent;
+        border: none;
+    }
+
+}
+
+
+/* =================================================================================================================== */
+
+.userSellerWraper{
+    width: 100%;
+    min-height: 100vh;
+    padding: 2rem;
+    #list{
+        width: unset;
+        background-color: white;
+        color: #08185d;
+        top: 2rem;
+        left: calc(50% - 23rem);
+        width: 40rem;
+        margin: auto;
+        z-index: 10;
+        border: 1px solid gainsboro;
+        caption{
+            background-color: aliceblue;
+        }
+        .email{
+            text-align: center;
+        }
+        .close{
+            width: 4rem;
+            padding: 5px 10px;
+            margin: 10px ;
+        }
+    
+        thead{
+            border: 1px solid grey;
+            text-align: center;
+            padding: 10px;
+        }
+        tbody{
+            tr:nth-child(even) {
+                background-color: #e4e5e86b;
+            }
+            text-align: center;
+        }
+    
+        th,td{
+            padding: 10px;
+        }
     }
 }
 
-#list{
-    width: unset;
-    background-color: aliceblue;
-    color: #08185d;
-    position: absolute;
-    top: 2rem;
-    left: calc(50% - 23rem);
-    width: 35rem;
-    z-index: 10;
-    caption{
-        background-color: aliceblue;
+/* ============================================================== */
+
+.orderWraper{
+    width: 100%;
+    height: 100%;
+    padding: 4rem;
+    position: relative;
+    .orderList{
+        width: 900px;
+        background-color: white;
+        tbody{
+            font-family: monospace;
+            font-weight: 500;
+        }
     }
-    .email{
-        text-align: center;
+
+    .orderOverlay{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #081341;
+        opacity: .5;
+        z-index: 5;
     }
-    .close{
-        width: 4rem;
-        padding: 5px 10px;
-        margin: 10px ;
+
+    .orderModal{
+        padding: 1.5rem;
+        width: 40rem;
+        position: absolute;
+        justify-content: center;
+        top: 5rem;
+        left: calc(50% - 20rem);
+        border-radius: 5px;
+        border: 1px solid gainsboro;
+        background-color: white;
+        z-index: 6;
+        .header{
+            border-bottom: 1px solid gainsboro;
+        }
+        .orderDetails{
+            width: 100%;
+            display: flex;
+            gap: 5rem;
+            padding: 7px;  
+            border-bottom: 1px solid gainsboro;
+            .orderimg{
+                width: 3.5rem;
+                height: 3.5rem;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        .closeOrder{
+            width: 2.3rem;
+            height: 2.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            border: none;
+            background-color: rgb(49, 48, 48);
+            opacity: .7;
+            color: white;
+            position: absolute;
+            top: -62px;
+            right: -17px;
+            font-size: 21px;
+        }
     }
+
 }
+

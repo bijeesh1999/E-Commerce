@@ -1,11 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { sellerLogin , sellerRegister , getSellers } from "./sellerApi";
+const sellerToken = localStorage.getItem("sellerToken");
+let sellerId = localStorage.getItem("sellerId");
 
 const initialState = {
     logedSeller: [],
     sellerRegister:[],
     sellerLogout:[],
     allSellers:[],
+    sellerToken:sellerToken,
+    sellerId:sellerId,
     status: 'idle',
 };
 

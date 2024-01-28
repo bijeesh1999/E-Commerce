@@ -1,11 +1,13 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
-import { editProduct, getProductById } from "../../redux/products/productApi";
+import { editProduct, getProductById , getProducts} from "../../redux/products/productApi";
 import { getCategories } from "../../redux/category/categoryApi";
 import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./editProduct.css"
 
 function EditProduct() {
+  const navigate=useNavigate();
   const dispatch = useDispatch();
   const id = useParams();
   const [prevImg , setPrevImg]=useState([0])
@@ -19,18 +21,17 @@ function EditProduct() {
     mrp: "",
   });
   const [fileImage,setFileImage]=useState([])
+  const [previmg , setPrevimg]=useState([])
 
 
-  // console.log(fileImage);
-  let array=[]
-  // console.log(array);
+  
 
-    for(let img of fileImage){
-      const dataURL =  readFileAsDataURL(img);
-      array.push(dataURL)
-    }
+  const fileArray = Array.from(fileImage);
+    const imageUrls = fileArray.map(file => URL.createObjectURL(file));
 
-    console.log(array);
+    // useEffect(()=>{
+    //   setPrevimg("")
+    // },[fileImage])
 
 
   useEffect(() => {
@@ -42,7 +43,11 @@ function EditProduct() {
   const categorys = useSelector((state) => state.category.categories);
   useEffect(() => {
     setProduct(data);
+    setPrevimg(data.images)
   }, [data]);
+
+
+  
 
   // console.log(product);
 
@@ -55,20 +60,20 @@ function EditProduct() {
 
   const newFiles=(e)=>{
     setFileImage(
-       e.target.files 
-    );
+      e.target.files
+      );
 
   }
 
 
-  const submitEditForm=(e)=>{
+  const submitEditForm=async (e)=>{
     e.preventDefault();
     const formData=new FormData();
 
     formData.append("ProductName",product.ProductName)
     formData.append("Quantity",product.Quantity)
     formData.append("Description",product.Description)
-    formData.append("categoryName",product.category)
+    formData.append("categoryName",product.categoryName)
     formData.append("Fetures",product.Fetures)
     formData.append("discount",product.discount)
     formData.append("mrp",product.mrp)
@@ -76,7 +81,20 @@ function EditProduct() {
       formData.append("images",data)
     }
     dispatch(editProduct({id:id.id,formData}))
+
+    setTimeout(() => {
+       dispatch(getProducts())
+       navigate("/adminSelling")
+    }, 200);
+
+
+    
+
+
   }
+
+
+  
 
 
   return (
@@ -85,13 +103,15 @@ function EditProduct() {
         <div className="productPrevew">
           <div className="productImg">
             <div className="allimg">
-              {product?.images?.map((img , index)=>(
-             <img src={`http://localhost:8086/uploads/${img}`} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
+              {product ? previmg?.map((img , index)=>(
+             <img src={`http://localhost:8086/uploads/${img}`||img} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
+              )):imageUrls?.map((img , index)=>(
+                <img src={img} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
               ))}
             </div>
             <div className="mainimg">
             {Array.isArray(product.images) && product.images.length > 0 && (
-            <img src={`http://localhost:8086/uploads/${product.images[prevImg]}`} className="singleimg" />
+            <img src={`http://localhost:8086/uploads/${previmg[prevImg]}`} className="singleimg" />
             )}
 
             </div>
@@ -108,6 +128,8 @@ function EditProduct() {
         </div>
         <div className="productEditForm">
           <form className="editForm" encType="multipart/form-data" onSubmit={submitEditForm}>
+           <div className="inputContainer">
+           <label for="productName">ProductName</label>
             <input
               type="name "
               name="ProductName"
@@ -115,6 +137,9 @@ function EditProduct() {
               value={product?.ProductName}
               onChange={editing}
             />
+           </div>
+           <div className="inputContainer">
+            <label for="Quantity">Quantity</label>
             <input
               type="text"
               name="Quantity"
@@ -122,6 +147,9 @@ function EditProduct() {
               value={product?.Quantity}
               onChange={editing}
             />
+           </div>
+           <div className="inputContainer">
+            <label for="files">Files</label>
             <input
               type="file"
               id="files"
@@ -129,6 +157,9 @@ function EditProduct() {
               multiple
               onChange={newFiles}
             />
+           </div>
+           <div className="inputContainer">
+            <label for="Description">Description</label>
             <textarea
               type="text"
               name="Description"
@@ -136,7 +167,9 @@ function EditProduct() {
               value={product?.Description}
               onChange={editing}
             />
-            <select id="categories" name="category" required onChange={editing}>
+           </div>
+           <div className="inputContainer">
+            <select id="categories" name="categoryName" required onChange={editing}>
               {categorys?.map((category, index) => (
                 <option
                   key={index}
@@ -146,6 +179,9 @@ function EditProduct() {
                 </option>
               ))}
             </select>
+           </div>
+           <div className="inputContainer">
+            <label for="Fetures">Fetures</label>
             <input
               type="text"
               name="Fetures"
@@ -153,6 +189,9 @@ function EditProduct() {
               value={product?.Fetures}
               onChange={editing}
             />
+           </div>
+           <div className="inputContainer">
+            <label for="discount">discount</label>
             <input
               type="text"
               name="discount"
@@ -160,6 +199,9 @@ function EditProduct() {
               value={product?.discount}
               onChange={editing}
             />
+           </div>
+           <div className="inputContainer">
+            <label for="mrp">mrp</label>
             <input
               type="text"
               name="mrp"
@@ -167,6 +209,7 @@ function EditProduct() {
               value={product.mrp}
               onChange={editing}
             />
+           </div>
             <div className="buttons">
             <input type="submit" className="button" />
               <button onClick={''} className="button">close</button> 

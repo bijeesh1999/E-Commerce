@@ -3,7 +3,6 @@ require("dotenv").config();
 const order=require("../mongoDb/models/orderSchema")
 const payProduct=require("../mongoDb/models/paymentSchema")
 const user=require("../mongoDb/models/userSchema");
-const { default: mongoose } = require("mongoose");
 
 const stripe = require("stripe")(process.env.PAYMENT_PRIVATE_KEY);
 

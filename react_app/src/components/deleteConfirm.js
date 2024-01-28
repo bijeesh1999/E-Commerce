@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteCategoryById  } from '../redux/category/categoryApi';
+import { deleteCategoryById, getCategories  } from '../redux/category/categoryApi';
 import { getProducts , deleteProductById } from '../redux/products/productApi';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -19,6 +19,7 @@ function DeleteModal({ id }) {
    await dispatch(deleteCategoryById(id));
    await dispatch(deleteProductById(id))
    await  dispatch(getProducts())
+   await dispatch(getCategories())
     handleClose();
   };
 

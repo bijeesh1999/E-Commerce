@@ -7,7 +7,6 @@ export const getProducts = createAsyncThunk(
     'getProducts',
     async () => {
         const res = await axios.get(`http://localhost:8086/products/`);
-        //  console.log(res.data);
         return res.data;
     },
 );
@@ -58,7 +57,7 @@ export const editProduct = createAsyncThunk(
         // console.log("+++",id);
         // console.log(formData);
         const res = await axios.put(`http://localhost:8086/products/${id}`,formData);
-        // console.log(res);
-        return res.data;
+        console.log(res.data);
+        return res.statusText;
     },
 );
