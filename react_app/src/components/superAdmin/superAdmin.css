@@ -301,3 +301,57 @@ button{
 
 }
 
+
+.adminLoginContainer{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url("https://img.freepik.com/free-vector/copy-space-blu…d98bdc58b48a42978335b52142a914cd1565ecfd382c58700");
+    form{
+        width: 400px;
+        margin: auto;
+        background-color: #b4b9b0;
+        display: grid;
+        gap: 1rem;
+        padding: 1rem 2rem;
+        border-radius: 7px;
+        position: absolute;
+        top: 3rem;
+        left: calc(50% - 200px);
+        .inputBlock{
+            display:grid;
+            input{
+                padding: 6px 13px;
+                border: none;
+                border-radius: 5px;
+                outline: none;
+            }
+        }
+        span{
+            text-align: center;
+            color: red;
+            font-weight: 600;
+        }
+        p{
+            color: red;
+            font-weight: 600;
+        }
+        button{
+            margin: 0 22px;
+            padding: 5px;
+            border: 1px solid white;
+            outline: none;
+            border-radius: 5px;
+            background: transparent;
+        }
+        button:hover{
+            background-color: white !important;
+            opacity: .6 !important;
+            transition: .5s;
+        }
+        h4{
+            font-weight: 300;
+        }
+    }
+}
+

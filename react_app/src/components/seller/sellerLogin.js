@@ -73,7 +73,7 @@ function LoginSeller(props) {
           <div className="instructions">
             <span>SellerLogin</span>
           <div className="image">image</div>
-          <div className="validation">{error}</div>
+          <span className="validation">{error}</span>
             <button id="Register" onClick={() => showRegister()}>Register ?</button>
           </div>
         </div>

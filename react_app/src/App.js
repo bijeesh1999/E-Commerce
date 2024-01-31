@@ -16,6 +16,7 @@ import AllUserList from "./components/superAdmin/allUsers";
 import AllCategorieList from "./components/superAdmin/allCategorie";
 import AllSellerList from "./components/superAdmin/allSellerse";
 import AllOrder from "./components/superAdmin/allOrder";
+import AdminLogin from "./components/superAdmin/adminLogin";
 
 
 // import User from "./User";
@@ -33,7 +34,7 @@ function App() {
           <Route path="/success/:id" element={<ByProduct />} />
           <Route path="/singleCategory/:id" element={<SingleCategory />} />
           <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<ByProduct />} />
+          {/* <Route path="*" element={< />} /> */}
           <Route path="/OrderSummary/:id" element={<OrderSummary />} />
           <Route path="/MyOrder" element={<MyOrder />} />
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="/allCategory" element={<AllCategorieList />} />
           <Route path="/allSellers" element={<AllSellerList />} />
           <Route path="/allOrderList" element={<AllOrder />} />
+          <Route path="/superAdminLogin" element={<AdminLogin />} />
 
         </Routes>
       </BrowserRouter>

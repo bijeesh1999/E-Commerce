@@ -10,6 +10,7 @@ const app=express();
 app.use(cors({
     origin:"http://localhost:3000",
     credentials:true
+    
 }));
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use("/seller",require("./routers/sellerRouter"));
 app.use("/user",require("./routers/userRouter"));
 app.use("/payProduct",require("./routers/paymentRouter"));
 app.use("/order" , require("./routers/orderRouter"));
+app.use("/admin",require("./routers/superRouter"));
 
 
 app.use('/uploads',express.static(__dirname + '/uploads'));

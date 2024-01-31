@@ -6,10 +6,11 @@ import "./myOrderHistory.css"
 
 function MyOrder(){
     const dispatch=useDispatch();
-    const id=useSelector((state)=>state.user.id)
+    // const id=useSelector((state)=>state.user.id)
+    let id = localStorage.getItem("userId");
 
     useEffect(()=>{
-        dispatch(getMyOrderHistory(id))
+            dispatch(getMyOrderHistory(id))
     },[id])
 
     const history=useSelector((state)=>state.order.orderHistory)

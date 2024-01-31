@@ -60,4 +60,9 @@
     align-items: end;
     justify-content: end;
     padding: .5rem 1rem;
+    .validation{
+        color: red;
+        border: 1px solid;
+    }
+
 }

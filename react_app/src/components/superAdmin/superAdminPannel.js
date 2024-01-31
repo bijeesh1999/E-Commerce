@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Cookies from 'js-cookie';
 import "./superAdmin.css"
 
 
 
 
 function SuperAdmin(){
+    const dispatch=useDispatch();
     const navigate=useNavigate();
+    useEffect(()=>{
+        if(!Cookies.get('token')){
+            navigate("/superAdminLogin")
+        }
+    },[])
+
+    const logOut=()=>{
+        Cookies.remove('token');
+        // navigate("/")
+        window.location.href = '/superAdminLogin'
+    }
 
     return(
         <>
@@ -17,7 +31,7 @@ function SuperAdmin(){
             <button className="menuButton">hello</button>
             <button className="menuButton">hello</button>
             <button className="menuButton">topper</button>
-            <button className="menuButton">log out</button>
+            <button className="menuButton" onClick={()=>logOut()}>log out</button>
             </div>
                 
         </div>

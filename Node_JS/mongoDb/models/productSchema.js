@@ -34,7 +34,6 @@ const productSchema= new Schema({
     categoryId:{
        type:mongoose.ObjectId
     },
-
     images:[String],
     
 

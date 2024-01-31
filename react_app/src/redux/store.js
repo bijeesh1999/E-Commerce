@@ -4,6 +4,8 @@ import productSlice from "./products/productSlice";
 import userSlice from "./userAuth/userSlice";
 import sellerSlice from "./sellerAuth/sellerSlice";
 import orderSlice from "./order/orderSlice";
+import superAdminSlice from "./superAdmin/superAdminSlice";
+
 
 const store = configureStore({
     reducer:{
@@ -11,7 +13,8 @@ const store = configureStore({
         category:categorySlice,
         user:userSlice,
         seller:sellerSlice,
-        order:orderSlice
+        order:orderSlice,
+        admin:superAdminSlice
     }
 
 })

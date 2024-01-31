@@ -66,6 +66,8 @@ h2{
             font-size: 14px;
             >img{
                 width: 10rem;
+                height: 12rem;
+                object-fit: contain;
                 padding: 10px;
             }
             .details{
