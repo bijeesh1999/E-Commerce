@@ -6,8 +6,9 @@ import axios from "axios";
 export const getCategories = createAsyncThunk(
     'getCategoryData',
     async () => {
-        const res = await axios.get(`http://localhost:8086/categories`);
-        return res.data;
+        const response = await axios.get(`http://localhost:8086/categories`);
+        // console.log(response);
+        return response.data;
     },
 );
 

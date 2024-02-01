@@ -24,11 +24,13 @@ function Laptops() {
       products?.map((element) => (
         category?.map((data)=>{
           if(element.categoryId == data._id && data.categoryName == "Laptops"){
-            array.push({images:element.images[0],
+            array.push({
+              images:element.images[0],
               id:element._id,
-              Name:element.ProductName,
-            })
-          }
+              Name:data.categoryName,
+              Product:element.ProductName,
+
+            })}
         })
       ));
       setLaptops(array)
@@ -41,14 +43,14 @@ function Laptops() {
   return (
     <div className="LaptopCollections">
     {/* <Slick /> */}
-    <h2>Laptops</h2>
+    <h2>{laptops ? laptops[0]?.Name:null}</h2>
       <div className="Laptops">
       {laptops?.map((image) => (
           <div className="img" key={image} onClick={()=>navigate(`/product/${image.id}`)}>
             <div className="image">
             <img src={`http://localhost:8086/uploads/${image.images}`} alt="images"/>
             </div>
-            <h3>{image.Name}</h3>
+            <h3>{image.Product}</h3>
           </div>
         ))}
       </div>

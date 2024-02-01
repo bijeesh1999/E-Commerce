@@ -26,12 +26,15 @@ function Mobiles() {
             element.categoryId == data._id &&
             data.categoryName === "Mobiles"
           ) {
-            array.push({images:element.images[0],
+            array.push({
+              images:element.images[0],
               id:element._id,
-              Name:element.ProductName,
-            })
-          }
+              Name:data.categoryName,
+              Product:element.ProductName,
+
+            })}
         }));
+        // console.log(array);
         setMobile(array)
     }
   }, [products, category]);
@@ -41,14 +44,14 @@ function Mobiles() {
     <>
       {/* <Slick /> */}
     <div className="mobileCollection">
-      <h2>Mobiles</h2>
+    <h2>{mobile ? mobile[0]?.Name:null}</h2>
       <div className="Mobiles">
       {mobile?.map((image,index) => (
           <div className="img" key={index} onClick={()=>navigate(`/product/${image.id}`)}>
             <div className="image">
             <img src={`http://localhost:8086/uploads/${image.images}`} alt="images"/>
             </div>
-            <h3>{image.Name}</h3>
+            <h3>{image.Product}</h3>
           </div>
         ))}
       </div>

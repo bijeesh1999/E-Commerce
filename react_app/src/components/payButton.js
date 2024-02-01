@@ -8,10 +8,11 @@ import LoginUser from "./user/userLogin";
 
 function PayButton (props){
     const id=useSelector((state)=>state.user.id);
+    const userName=useSelector((state)=>state.user?.getSingle.userName);
     let products=props.data;
     let total=props.amount;
-    let {...data}={products,id,total}
-console.log("hello:",props);
+    let {...data}={products,id,total,userName}
+// console.log("hello:",props);
     const handleOrder= async ()=>{
         await axios.post(`http://localhost:8086/payProduct/`,data)
         .then((res)=>{

@@ -10,7 +10,6 @@ function Watches() {
   const dispatch = useDispatch();
   let [image,setImage]=useState([]);
 
-
   useEffect(() => {
     dispatch(getProducts());
   }, [dispatch]);
@@ -27,11 +26,13 @@ function Watches() {
             element.categoryId === data._id &&
             data.categoryName === "Watches"
           ) {
-            newArray.push({images:element.images[0],
+            newArray.push({
+              images:element.images[0],
               id:element._id,
-              Name:element.ProductName,
-            })
-          }
+              Name:data.categoryName,
+              Product:element.ProductName,
+
+            })}
         }));
         setImage(newArray)
     }
@@ -41,14 +42,14 @@ function Watches() {
   return (
     <div className="WatchCollection">
       {/* <Slick /> */}
-      <h2>Watches</h2>
+      <h2>{image ? image[0]?.Name:null}</h2>
       <div className="Watches">
         {image?.map((image,index) => (
           <div className="img" key={index} onClick={()=>navigate(`/product/${image.id}`)}>
             <div className="image">
             <img src={`http://localhost:8086/uploads/${image.images}`} alt="images"/>
             </div>
-            <h3>{image.Name}</h3>
+            <h3>{image.Product}</h3>
           </div>
         ))}
       </div>

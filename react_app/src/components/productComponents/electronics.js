@@ -24,10 +24,12 @@ function Electronics() {
       products?.map((element) => (
         category?.map((data)=>{
           if(element.categoryId == data._id && data.categoryName == "Electronics"){
-            array.push({images:element.images[0],
+            array.push({
+              images:element.images[0],
               id:element._id,
-              Name:element.ProductName,
-            })          }
+              Product:element.ProductName,
+              Name:data.categoryName
+            })}
         })
       ));
       setElectronics(array)
@@ -35,20 +37,22 @@ function Electronics() {
 
   },[products,category]);
 
+  console.log(electronics);
+
 
 
 
   return (
     <div className="electronics">
     {/* <Slick /> */}
-    <h2>Electronics</h2>
+    <h2>{electronics ? electronics[0]?.Name:null}</h2>
       <div className="Electronics">
       {electronics?.map((image) => (
           <div className="img" key={image} onClick={()=>navigate(`/product/${image.id}`)}>
             <div className="image">
             <img src={`http://localhost:8086/uploads/${image.images}`} alt="images"/>
             </div>
-            <h3>{image.Name}</h3>
+            <h3>{image.Product}</h3>
           </div>
         ))}
       </div>

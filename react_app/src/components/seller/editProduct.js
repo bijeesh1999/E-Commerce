@@ -24,10 +24,13 @@ function EditProduct() {
   const [previmg , setPrevimg]=useState([])
 
 
+
+// console.log("editId:",id);
+//   console.log(product);
   
 
-  const fileArray = Array.from(fileImage);
-    const imageUrls = fileArray.map(file => URL.createObjectURL(file));
+  // const fileArray = Array.from(fileImage);
+  //   const imageUrls = fileArray.map(file => URL.createObjectURL(file));
 
     // useEffect(()=>{
     //   setPrevimg("")
@@ -37,10 +40,11 @@ function EditProduct() {
   useEffect(() => {
     dispatch(getProductById(id.id));
     dispatch(getCategories());
-  }, [dispatch, id]);
+  }, [id]);
 
   const data = useSelector((state) => state.product?.singleProduct);
   const categorys = useSelector((state) => state.category.categories);
+  // console.log(data);
   useEffect(() => {
     setProduct(data);
     setPrevimg(data.images)
@@ -65,7 +69,6 @@ function EditProduct() {
 
   }
 
-
   const submitEditForm=async (e)=>{
     e.preventDefault();
     const formData=new FormData();
@@ -86,27 +89,15 @@ function EditProduct() {
        dispatch(getProducts())
        navigate("/adminSelling")
     }, 200);
-
-
-    
-
-
   }
-
-
-  
-
-
   return (
     <div className="editWraper">
       <div className="editContainer">
         <div className="productPrevew">
           <div className="productImg">
             <div className="allimg">
-              {product ? previmg?.map((img , index)=>(
+              {previmg?.map((img , index)=>(
              <img src={`http://localhost:8086/uploads/${img}`||img} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
-              )):imageUrls?.map((img , index)=>(
-                <img src={img} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
               ))}
             </div>
             <div className="mainimg">

@@ -27,11 +27,13 @@ function Fasion() {
             element.categoryId == data._id &&
             data.categoryName == "Fasion"
           ){
-            array.push({images:element.images[0],
+            array.push({
+              images:element.images[0],
               id:element._id,
-              Name:element.ProductName,
-            })
-          }
+              Name:data.categoryName,
+              Product:element.ProductName,
+
+            })}
         })
       ));
       setFasion(array)
@@ -41,17 +43,18 @@ function Fasion() {
 
 
 
+
   return (
     <div className="fasionCollection">
     {/* <Slick /> */}
-    <h2>Fasion</h2>
+        <h2>{fasion ? fasion[0]?.Name:null}</h2>
       <div className="Fasion">
       {fasion?.map((image) => (
           <div className="img" key={image} onClick={()=>navigate(`/product/${image.id}`)}>
             <div className="image">
             <img src={`http://localhost:8086/uploads/${image.images}`} alt="images"/>
             </div>
-            <h3>{image.Name}</h3>
+            <h3>{image.Product}</h3>
           </div>
         ))}
       </div>

@@ -24,10 +24,12 @@ function HomeAppliances() {
       products?.map((element) => (
         category?.map((data)=>{
           if(element.categoryId == data._id && data.categoryName == "HomeAppliances"){
-            array.push({images:element.images[0],
+            array.push({
+              images:element.images[0],
               id:element._id,
-              Name:element.ProductName,
-            })          }
+              Name:data.categoryName,
+              Product:element.ProductName,
+            })}
         })
       ));
       setHomeAppliances(array)
@@ -39,14 +41,14 @@ function HomeAppliances() {
   return (
     <div className="homeAppliances">
     {/* <Slick /> */}
-    <h2>HomeAppliances</h2>
+    <h2>{homeappliances ? homeappliances[0]?.Name:null}</h2>
       <div className="HomeAppliances">
       {homeappliances?.map((image,index) => (
           <div className="img" key={index} onClick={()=>navigate(`/product/${image.id}`)}>
             <div className="image">
             <img src={`http://localhost:8086/uploads/${image.images}`} alt="images"/>
             </div>
-            <h3>{image.Name}</h3>
+            <h3>{image.Product}</h3>
           </div>
         ))}
       </div>

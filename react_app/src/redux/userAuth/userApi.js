@@ -48,8 +48,8 @@ export const updateUser = createAsyncThunk("updateUsers", async ({userId , produ
 });
 
 
-export const getUsersById = createAsyncThunk("getUsersById", async (id) => {
-// console.log(id);
+export const getUsersById = createAsyncThunk("getUserById", async (id) => {
+console.log(id);
   let res = await axios.get(`http://localhost:8086/user/${id}`);
   return res.data;
 });

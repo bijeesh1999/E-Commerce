@@ -45,7 +45,7 @@ function AllOrder(){
                 <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{data.userName}</td>
-                    <td>{data._id}</td>
+                    <td>{data.orderId}</td>
                     <td>{data.status}</td>
                     <td className="list" ><i className="fa-solid fa-circle-info" style={{fontSize:"21px"}} onClick={()=>getOne(data._id)}></i></td>
                 </tr>

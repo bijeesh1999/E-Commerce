@@ -16,9 +16,11 @@ function SuperAdmin(){
         }
     },[])
 
-    const logOut=()=>{
+    const logOut= async ()=>{
         Cookies.remove('token');
-        // navigate("/")
+        // setTimeout(() => {
+        //      navigate("/superAdminLogin")
+        // }, 1000);
         window.location.href = '/superAdminLogin'
     }
 
