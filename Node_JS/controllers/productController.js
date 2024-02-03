@@ -63,8 +63,9 @@ const createProduct = async (req, res) => {
 // ===============================================
 
 const getOneProductById = async (req, res) => {
-  let { id } = req.params;
   try {
+  let {id} = req.params;
+  // console.log("productId:",id);
     if (id) {
       let idData = await product.findById(id);
       res.status(200).json(idData);
@@ -82,6 +83,7 @@ const getOneProductById = async (req, res) => {
 
 const updateProductById = async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   const { ...data } = req.body;
   console.log(req.files);
   console.log(req.body);

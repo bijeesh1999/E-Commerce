@@ -6,13 +6,40 @@ const mongoose=require("mongoose")
 
 
 const getUser = async (req,res) => {
-    const allUsers=await user.find({});
-    if(!allUsers){
-        res.status(400).json("user not found")
-    }else{
-        res.status(200).json(allUsers)
+    try {
+
+        const page=parseInt(req.query.page)||1;
+        const limit=req.query.limit||5;
+        const skip=limit * (page-1);
+        const key=req.query.key;
+        const users=await user.find({});
+        const totalPage=Math.ceil(users.length / limit);
+        console.log(page);
+
+        const pipeline=[{
+            $facet:{
+                data:[
+                    {$skip:skip},
+                    {$limit:limit},
+                    ...(key ? [{ $match: { userName: key } }] : []),
+                ]
+            }
+            },{ $project: {_id:0,user:"$data"} }
+        ]
+        const Users=await user.aggregate(pipeline);
+        if(!Users){
+            res.status(400).json("user not found")
+        }else{
+            res.status(200).json({Users,totalPage})
+        }
+        
+    } catch (error) {
+        console.log(error);
     }
+
 };
+
+// ================================================================
 
 
 const getUserById = async (req,res) => {
@@ -26,11 +53,13 @@ const getUserById = async (req,res) => {
     }
 }
 
+// ==============================================================
+
 
 const postUser = async (req,res) => {
 
     const {userName,emailId,password}= req.body;
-    console.log(req.body);
+    // console.log(req.body);
     if(!userName,!emailId,!password){
         console.log("user is not found");
         return res.status(201).json("some fields are mandatory");

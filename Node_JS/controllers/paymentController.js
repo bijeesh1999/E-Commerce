@@ -3,16 +3,23 @@ require("dotenv").config();
 const order=require("../mongoDb/models/orderSchema")
 const payProduct=require("../mongoDb/models/paymentSchema")
 const user=require("../mongoDb/models/userSchema");
+const ShortUniqueId = require('short-unique-id');
+const uid = new ShortUniqueId({ length: 10 });
+
+
 
 const stripe = require("stripe")(process.env.PAYMENT_PRIVATE_KEY);
 
 const payment = async (req, res) => {
   const cartData = req.body;
+  // console.log("userName:",cartData);
 
   const producrOrder=await order.create({
     cartData:cartData.products,
     userId:cartData.id,
-    totalAmount:cartData.total
+    totalAmount:cartData.total,
+    userName:cartData.userName,
+    orderId:uid.rnd()
   })
 
 
@@ -52,7 +59,6 @@ const payment = async (req, res) => {
 
 
     res.status(200).json( {url:session.url} );
-    // console.log(session);
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -67,29 +73,21 @@ const getPayment= async (req,res)=>{
   const session = await stripe.checkout.sessions.retrieve(paymentData[0].paymentID)
   res.status(200).send(session.status)
   if(session.status === "complete"){
+    
      const updatedData= await order.findByIdAndUpdate(req.params.id,{
       status:session.status,
       shippingAddress:session.shipping_details.address,
       billingAddress:session.customer_details.address,
-      userName:session.customer_details.name,
+      // userName:session.customer_details.name,
     });
-    //  console.log(session.customer_details.name);
      if (updatedData){ 
         let singleUser= await user.findByIdAndUpdate(updatedData.userId,{
           shippingAddress:session.shipping_details.address,
           billingAddress:session.customer_details.address,
         })
-        if(singleUser){
-          // console.log(singleUser);
-        }
     } 
 }
-
-// if(paymentData.){}
-
-}
-
-
-}
+console.log(session);
+}}
 
 module.exports = {payment,getPayment};

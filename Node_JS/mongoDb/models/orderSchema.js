@@ -10,7 +10,8 @@ const orderSchema=mongoose.Schema({
     status:{type: String, default: "pending"},
     shippingAddress:Object,
     billingAddress:Object,
-    userName:String
+    userName:String,
+    orderId:String
 
 },{
     timestamps:true

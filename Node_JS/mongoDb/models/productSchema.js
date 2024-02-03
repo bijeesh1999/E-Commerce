@@ -34,6 +34,9 @@ const productSchema= new Schema({
     categoryId:{
        type:mongoose.ObjectId
     },
+    sellerId:{
+        type:mongoose.ObjectId
+    },
     images:[String],
     
 
