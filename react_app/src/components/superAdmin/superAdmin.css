@@ -1,6 +1,4 @@
 table {
-    width: 500px;
-    margin: auto;
     border: .2px solid grey;
     background-color: white;
     thead , tbody{
@@ -132,8 +130,8 @@ button{
                 gap: 10px;
                 background-color: #eff4f8;
                 padding: 1rem 3rem;
-            border-radius: 5px;
-            box-shadow: 1px 4px 9px grey;
+                border-radius: 5px;
+                box-shadow: 1px 4px 9px grey;
                 input{
                     border: 0.5px solid rgb(160, 160, 160);
                     border-radius: 5px;
@@ -141,7 +139,7 @@ button{
                     font-size: 13px;
                     outline-color: #08185d;
                 }
-                .categorybuttons{
+                 .categorybuttons{
                     display: flex;
                     justify-content: space-between;
                     font-size: 10px;
@@ -155,6 +153,10 @@ button{
                         border-radius: 5px;
                     }
                 }
+            }
+            table{
+                width: 500px;
+                margin: auto;
             }
     }
     .addCategory{
@@ -184,15 +186,15 @@ button{
     width: 100%;
     min-height: 100vh;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
     #list{
-        width: unset;
         background-color: white;
         color: #08185d;
         top: 2rem;
-        left: calc(50% - 23rem);
-        width: 40rem;
-        margin: auto;
-        z-index: 10;
+        width: 40rem !important;
         border: 1px solid gainsboro;
         caption{
             background-color: aliceblue;
@@ -355,3 +357,25 @@ button{
     }
 }
 
+
+.pages{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    .prevbtn , .nextbtn{
+        width: 2rem;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+        background-color: #020221;
+        color: white;
+    }
+    .sinlePage{
+        width: 1.5rem;
+        border: none;
+        background-color: rgb(87, 86, 86);
+        text-align: center;
+        border-radius: 5px;
+    }
+
+}

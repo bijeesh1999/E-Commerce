@@ -13,9 +13,12 @@ function AllSellerList(){
 
     const sellers=useSelector((state)=>state.seller.allSellers)
 
+    const data=sellers?.allSellers?.map((data)=>data);
+    const page=sellers.totalPage;
+
     return(
         <>
-        <UserSeller data={sellers}/>
+        <UserSeller data={data&&data[0]} totalPage={page}/>
         </>
     )
 

@@ -14,9 +14,15 @@ function AllUserList(){
 
     const users=useSelector((state)=>state.user.allUser)
 
+    // console.log(users);
+    const data=users?.Users?.map((data)=>data);
+    const page=users.totalPage;
+    // console.log("data:",data);
+    // console.log("page:",page);
+
     return(
         <>
-        <UserSeller data={users}/>
+        <UserSeller data={data&&data[0]} totalPage={page}/>
         </>
     )
 

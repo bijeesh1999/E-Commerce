@@ -4,7 +4,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 
 export const userLogin = createAsyncThunk("userLogin", async (login) => {
-  console.log(login);
+  // console.log(login);
   const res = await axios.post("http://localhost:8086/user/login", login, {
     withCredentials: true,
   })
@@ -33,8 +33,9 @@ export const userRegister = createAsyncThunk(
   }
 );
 
-export const getUsers = createAsyncThunk("getAllUsers", async () => {
-  let res = await axios.get("http://localhost:8086/user");
+export const getUsers = createAsyncThunk("getAllUsers", async (page) => {
+  // console.log(page);
+  let res = await axios.get(`http://localhost:8086/user?page=${page}`);
   // console.log(res);
   return res.data;
 });
@@ -49,7 +50,7 @@ export const updateUser = createAsyncThunk("updateUsers", async ({userId , produ
 
 
 export const getUsersById = createAsyncThunk("getUserById", async (id) => {
-console.log(id);
+// console.log(id);
   let res = await axios.get(`http://localhost:8086/user/${id}`);
   return res.data;
 });

@@ -1,13 +1,34 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { getUsers } from "../../redux/userAuth/userApi";
+import { getSellers } from "../../redux/sellerAuth/sellerApi";
 import { useNavigate } from "react-router-dom";
 
+
 function UserSeller(props) {
-  const navigate=useNavigate()
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   const [userOrSeller,setUserOrSeller]=useState();
+  const [count , setCount]=useState(1)
+
+  // console.log(props);
+
+  const pages=props.totalPage;
+  const pageButtons = Array.from({ length: pages }, (_, index) => index + 1);
+
+  useEffect(()=>{
+    if(props.data?.user){
+      setUserOrSeller(props?.data?.user);
+    }else if(props.data?.seller){
+      setUserOrSeller(props?.data?.seller);
+    }
+ },[props])
+
 
  useEffect(()=>{
-  setUserOrSeller(props.data)
- },[props])
+  dispatch(getUsers(count))
+  dispatch(getSellers(count))
+ },[count])
 
 
   return (
@@ -30,7 +51,13 @@ function UserSeller(props) {
           ))}
         </tbody>
       </table>
-        {/* <button className="close" onClick={()=>navigate("/superAdmin")}>close</button> */}
+      <div className="pages">
+        <button className="prevbtn" onClick={()=>setCount(count-1)}>{"<<"}</button>
+        {pageButtons ? pageButtons.map((button, index) => (
+           <button className="sinlePage" key={index} onClick={()=>setCount(index+1)}>{button}</button>
+        )) : null}
+        <button className="nextbtn" onClick={()=>setCount(count+1)}>{">>"}</button>
+      </div>
     </div>
   );
 }

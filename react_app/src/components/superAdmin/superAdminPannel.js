@@ -18,9 +18,9 @@ function SuperAdmin(){
 
     const logOut= async ()=>{
         Cookies.remove('token');
-        // setTimeout(() => {
-        //      navigate("/superAdminLogin")
-        // }, 1000);
+        // if(!Cookies.get('token')){
+        //     navigate("/superAdminLogin")
+        // }
         window.location.href = '/superAdminLogin'
     }
 
