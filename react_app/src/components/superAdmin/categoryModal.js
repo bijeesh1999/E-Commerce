@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import DeleteModal from "../deleteConfirm";
-import {
-  postCategoryData,
-  updateCategory,
-  getCategories,
-} from "../../redux/category/categoryApi";
+import {getFilterCategory, postCategoryData,updateCategory}from "../../redux/category/categoryApi";
 import "./superAdmin.css";
 
 function CategoryModal(props) {
+  const [count,setCount]=useState(1)
+  const [key , setKey]=useState("")
+  const filterCategory=props?.data?.category;
+  const pageButtons = Array.from({ length: props.totalPage }, (_, index) => index + 1);
+  // console.log(pageButtons);
+
   const navigate = useNavigate();
   const [form, setForm] = useState(false);
 
@@ -18,7 +20,6 @@ function CategoryModal(props) {
   });
   const [button, setButton] = useState(false);
   const dispatch = useDispatch();
-  const category = props.categorie;
 
   const editCategory = (data) => {
     console.log(data);
@@ -40,7 +41,7 @@ function CategoryModal(props) {
     e.preventDefault();
     dispatch(postCategoryData(add));
     setTimeout(() => {
-      dispatch(getCategories());
+      dispatch(getFilterCategory());
       setForm(false);
       setAdd("");
     }, 200);
@@ -50,7 +51,7 @@ function CategoryModal(props) {
     e.preventDefault();
     dispatch(updateCategory(add));
     setTimeout(() => {
-      dispatch(getCategories());
+      dispatch(getFilterCategory());
     }, 200);
     setForm(false);
   };
@@ -60,9 +61,28 @@ function CategoryModal(props) {
     setForm(false);
   };
 
+  const searchData=(e)=>{
+    setTimeout(() => {
+      setKey(e.target.value)
+    }, 1000);
+  }
+
+  useEffect(()=>{
+    if(count){
+      dispatch(getFilterCategory({page:count,key}))
+    }else if(key){
+      dispatch(getFilterCategory({key}))
+    }
+  },[count,key])
+
+  console.log("search",key);
+  console.log(count);
+
   return (
     <div id="categoryModal">
       <div className="addButton">
+        <input type="search" className="search" name="search" onChange={searchData}/>
+        <i className="fa-solid fa-magnifying-glass"></i>
         <button className="addCategory" onClick={() => addModal()}>
           Add
         </button>
@@ -104,16 +124,18 @@ function CategoryModal(props) {
           </form>
         ) : null}
       </div>
-      <table>
+      <table className="categoryTable">
         <thead>
           <tr>
+            <th>no</th>
             <th>Category</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {category?.map((data, index) => (
+          {filterCategory?.map((data, index) => (
             <tr key={index}>
+              <td>{index+1}</td>
               <td>{data.categoryName}</td>
               <td className="categoryAction">
                 <DeleteModal id={data._id} />
@@ -126,9 +148,14 @@ function CategoryModal(props) {
           ))}
         </tbody>
       </table>
-      <div
-        style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}
-      ></div>
+      <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}></div>
+      <div className="pages">
+        <button className="prevbtn" onClick={()=>setCount(count-1)}>{"<<"}</button>
+        {pageButtons ? pageButtons.map((button, index) => (
+           <button className="sinlePage" key={index} onClick={()=>setCount(index+1)}>{button}</button>
+        )) : null}
+        <button className="nextbtn" onClick={()=>setCount(count+1)}>{">>"}</button>
+      </div>
     </div>
   );
 }

@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCategories,updateCategory,postCategoryData,deleteCategoryById } from "./categoryApi";
+import { getCategories,updateCategory,postCategoryData,deleteCategoryById ,getFilterCategory } from "./categoryApi";
 
 const initialState = {
     categories: [],
     postCategory:[],
     deleted:[],
+    filter:[],
     update:[],
     status: 'idle',
 };
@@ -62,7 +63,21 @@ const categorySlice = createSlice({
             .addCase(deleteCategoryById.rejected, (state) => {
                 state.status = "Failed";
             })
+
+    //==============================================================================
+    
+            .addCase(getFilterCategory.pending, (state) => {
+                state.status = "Loading";
+            })
+            .addCase(getFilterCategory.fulfilled, (state, action) => {
+                state.filter = action.payload;
+            })
+            .addCase(getFilterCategory.rejected, (state) => {
+                state.status = "Failed";
+            })
+            
     },
 });
 
 export default categorySlice.reducer;
+

@@ -10,6 +10,7 @@ function UserSeller(props) {
   const navigate=useNavigate();
   const [userOrSeller,setUserOrSeller]=useState();
   const [count , setCount]=useState(1)
+  const [key,setKey]=useState()
 
   // console.log(props);
 
@@ -26,13 +27,23 @@ function UserSeller(props) {
 
 
  useEffect(()=>{
-  dispatch(getUsers(count))
-  dispatch(getSellers(count))
- },[count])
+    dispatch(getUsers({page:count,key}))
+    dispatch(getSellers({page:count,key}))
+    console.log(key);
+ },[count,key])
+
+ const searchData=(e)=>{
+  setTimeout(() => {
+    setKey(e.target.value)
+  },1000);
+}
+
+console.log(key);
 
 
   return (
     <div className="userSellerWraper">
+            <input type="search" className="search" name="search"onChange={searchData}/>
       <table id="list">
         <thead>
           <tr>

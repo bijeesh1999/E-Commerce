@@ -37,8 +37,9 @@ export const sellerRegister = createAsyncThunk(
 
 
 
-export const getSellers = createAsyncThunk("getAllSellers", async (page) => {
-  // console.log(page);
-  let res = await axios.get(`http://localhost:8086/seller?page=${page}`);
+export const getSellers = createAsyncThunk("getAllSellers", async ({page,key}) => {
+  console.log(page,key);
+  let res = await axios.get(`http://localhost:8086/seller?page=${page}&key=${key?key:key=''}`);
+  console.log(res);
   return res.data;
 });

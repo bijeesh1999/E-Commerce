@@ -14,7 +14,6 @@ const getUser = async (req,res) => {
         const key=req.query.key;
         const users=await user.find({});
         const totalPage=Math.ceil(users.length / limit);
-        console.log(page);
 
         const pipeline=[{
             $facet:{

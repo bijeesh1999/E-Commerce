@@ -21,9 +21,7 @@ export const userLogin = createAsyncThunk("userLogin", async (login) => {
 export const userRegister = createAsyncThunk(
   "userRegister",
   async (register) => {
-    const res = await axios.post(
-      "http://localhost:8086/user/register",register
-    )
+    const res = await axios.post("http://localhost:8086/user/register",register)
     if (res.status == 201){
       return {data:res.data , status:res.status};
     }
@@ -33,10 +31,8 @@ export const userRegister = createAsyncThunk(
   }
 );
 
-export const getUsers = createAsyncThunk("getAllUsers", async (page) => {
-  // console.log(page);
-  let res = await axios.get(`http://localhost:8086/user?page=${page}`);
-  // console.log(res);
+export const getUsers = createAsyncThunk("getAllUsers", async ({page,key}) => {
+  let res = await axios.get(`http://localhost:8086/user?page=${page}&key=${key?key:key=''}`);
   return res.data;
 });
 
@@ -50,7 +46,6 @@ export const updateUser = createAsyncThunk("updateUsers", async ({userId , produ
 
 
 export const getUsersById = createAsyncThunk("getUserById", async (id) => {
-// console.log(id);
   let res = await axios.get(`http://localhost:8086/user/${id}`);
   return res.data;
 });

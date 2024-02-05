@@ -12,6 +12,24 @@ export const getCategories = createAsyncThunk(
     },
 );
 
+
+export const getFilterCategory = createAsyncThunk(
+    'getFilterCategory',
+    async ({page,key}) => {
+        let limit;
+        // console.log(page,key);
+        // if(key){
+        //     limit=0
+        // }else{
+        //     limit=5
+        // }
+        const response = await axios.get(`http://localhost:8086/categories/filter/?page=${page}&limit=${limit}&key=${key}`);
+        // console.log(response);
+        return response.data;
+    },
+);
+
+
 export const updateCategory = createAsyncThunk(
     'updateCategory',
     async (data) => {

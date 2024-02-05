@@ -12,7 +12,6 @@ const getSeller = async (req, res) => {
     const key=req.query.key;
     const sellers = await seller.find({});
     const totalPage = Math.ceil(sellers.length / limit);
-    console.log(page,key);
 
     const pipeline = [
       {

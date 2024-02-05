@@ -8,13 +8,20 @@ import { getAllOrder , getOneOrder } from "../../redux/order/orderApi";
 function AllOrder(){
     const [order , setOrder]=useState()
     const [modal , setModal]=useState(false)
+    const [count,setCount]=useState(1)
+    const [key,setKey]=useState()
     const dispatch=useDispatch();
     const allorder=useSelector((state)=>state.order.allOrder)
+    const Order=allorder?.allOrder?.map((data)=>data?.order);
+    const filter=Order?Order[0].map((data)=>data):null;
+    const pageButtons = Array.from({ length: allorder.totalPage }, (_, index) => index + 1);
+
+    // console.log(count);
 
 
     useEffect(()=>{
-        dispatch(getAllOrder())
-    },[dispatch])
+        dispatch(getAllOrder({page:count,key}))
+    },[dispatch,count,key])
 
     const getOne=(id)=>{
         dispatch(getOneOrder(id))
@@ -24,11 +31,18 @@ function AllOrder(){
     const singleOrder=useSelector((state)=>state.order?.singleOrder)
     useEffect(()=>{
         setOrder(singleOrder?.data)
-    },[singleOrder])
+    },[singleOrder,key])
 
-    console.log(order?.cartData);
+    const handleSearch=(e)=>{
+        setTimeout(() => {
+            setKey(e.target.value) 
+        }, 1000);
+    }
+
+    console.log(key);
     return(
-
+        <>
+        <input type="search"name="search"className="search"  onChange={handleSearch}/>
         <div className="orderWraper">
         <table className="orderList">
             <thead>
@@ -41,7 +55,7 @@ function AllOrder(){
                 </tr>
             </thead>
             <tbody>
-                {allorder.map((data , index)=>(
+                {filter?.map((data , index)=>(
                 <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{data.userName}</td>
@@ -68,9 +82,16 @@ function AllOrder(){
            ))}
            <button className="closeOrder" onClick={()=>setModal(false)}><i class="fa-solid fa-xmark"></i></button>
         </div> : null}
+        <div className="pages">
+        <button className="prevbtn" onClick={()=>setCount(count-1)}>{"<<"}</button>
+        {pageButtons ? pageButtons.map((button, index) => (
+           <button className="sinlePage" key={index} onClick={()=>setCount(index+1)}>{button}</button>
+        )) : null}
+        <button className="nextbtn" onClick={()=>setCount(count+1)}>{">>"}</button>
+      </div>
         </div>
 
-        
+        </>
     )
 
 

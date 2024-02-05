@@ -1,12 +1,33 @@
 const order = require ("../mongoDb/models/orderSchema");
-const { db } = require("../mongoDb/models/productSchema");
 
 
 const getAllOrder=async (req,res) => {
 
-    const allOrder=await order.find({});
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) ||1;
+    const {key}=req.query;
+    const skip = limit * (page - 1);
+    const orders = await order.find({});
+    const totalPage = Math.ceil(orders.length / limit);
+
+    // console.log(key);
+
+
+    const pipeline=[{
+        $facet:{
+            data:[
+                {$skip:skip},
+                {$limit:limit},
+                ...(key ? [{ $match: { userName: key } }] : []),
+            ]
+        }},{
+       $project:{
+            _id:0,order:"$data"
+        }
+    }]
+    const allOrder=await order.aggregate(pipeline);
     if(allOrder){
-        res.status(200).json(allOrder)
+        res.status(200).json({allOrder,totalPage})
     }
 
 }

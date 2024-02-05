@@ -1,11 +1,12 @@
 const express=require("express")
 const Router=express.Router();
 
-const {getAllCategogy,createCategogy,getOneCategogyById,updateCategogyById,deleteCategogyById,}=require("../controllers/catagoryController");
+const {getAllCategory,createCategory,getOneCategoryById,updateCategoryById,deleteCategoryById,getFilterCategory}=require("../controllers/catagoryController");
 
 
-Router.route("/").get(getAllCategogy).post(createCategogy);
-Router.route("/:id").get(getOneCategogyById).put(updateCategogyById).delete(deleteCategogyById);
+Router.route("/").get(getAllCategory).post(createCategory);
+Router.route("/filter").get(getFilterCategory);
+Router.route("/:id").get(getOneCategoryById).put(updateCategoryById).delete(deleteCategoryById);
 
 
 module.exports=Router
