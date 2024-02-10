@@ -16,15 +16,7 @@ export const getCategories = createAsyncThunk(
 export const getFilterCategory = createAsyncThunk(
     'getFilterCategory',
     async ({page,key}) => {
-        let limit;
-        // console.log(page,key);
-        // if(key){
-        //     limit=0
-        // }else{
-        //     limit=5
-        // }
-        const response = await axios.get(`http://localhost:8086/categories/filter/?page=${page}&limit=${limit}&key=${key}`);
-        // console.log(response);
+        const response = await axios.get(`http://localhost:8086/categories/filter/?page=${page}&limit=${5}&key=${key}`);
         return response.data;
     },
 );
@@ -56,7 +48,10 @@ export const deleteCategoryById = createAsyncThunk(
     'deleteCategoryById',
     async (id) => {
             const res = await axios.delete(`http://localhost:8086/categories/${id}`);
-            console.log(res);
-            return res.data;
+            // console.log(res);
+            if(res.statusText == "OK"){
+                await getFilterCategory()
+                return res.statusText;
+            }
         }
 );

@@ -1,5 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { editProduct, getProductById , getProducts} from "../../redux/products/productApi";
 import { getCategories } from "../../redux/category/categoryApi";
 import { useParams } from "react-router-dom";
@@ -7,10 +8,13 @@ import { useNavigate } from "react-router-dom";
 import "./editProduct.css"
 
 function EditProduct() {
+  const [params,setParams]=useSearchParams()
   const navigate=useNavigate();
   const dispatch = useDispatch();
   const id = useParams();
-  const [prevImg , setPrevImg]=useState([0])
+  const location=params.get('navigate')
+  console.log(location);
+  const [prevImg , setPrevImg]=useState(0);
   const [product, setProduct] = useState({
     ProductName: "",
     Quantity: "",
@@ -23,37 +27,36 @@ function EditProduct() {
   const [fileImage,setFileImage]=useState([])
   const [previmg , setPrevimg]=useState([])
 
+  const data = useSelector((state) => state.product?.singleProduct);
+  const categorys = useSelector((state) => state.category.categories);
 
-
-// console.log("editId:",id);
-//   console.log(product);
+// =========================useEffetct===============================================
   
-
-  // const fileArray = Array.from(fileImage);
-  //   const imageUrls = fileArray.map(file => URL.createObjectURL(file));
-
-    // useEffect(()=>{
-    //   setPrevimg("")
-    // },[fileImage])
-
+useEffect(()=>{
+  if(data){
+    console.log(data.images);
+    const imageUrls=data?.images?.map(file => `http://localhost:8086/uploads/${file}` )
+      setPrevimg(imageUrls)
+  }
+  if(fileImage.length > 0){    
+    console.log(fileImage);
+    const fileArray = Array.from(fileImage);
+    const imageUrls = fileArray.map(file => URL.createObjectURL(file));
+      setPrevimg(imageUrls)
+  }
+},[data,fileImage])
 
   useEffect(() => {
     dispatch(getProductById(id.id));
     dispatch(getCategories());
   }, [id]);
 
-  const data = useSelector((state) => state.product?.singleProduct);
-  const categorys = useSelector((state) => state.category.categories);
-  // console.log(data);
   useEffect(() => {
     setProduct(data);
-    setPrevimg(data.images)
   }, [data]);
 
+  // =============================================================================
 
-  
-
-  // console.log(product);
 
   const editing = (e) => {
     setProduct((prevProduct) => ({
@@ -87,7 +90,7 @@ function EditProduct() {
 
     setTimeout(() => {
        dispatch(getProducts())
-       navigate("/adminSelling")
+       navigate(location)
     }, 200);
   }
   return (
@@ -97,14 +100,13 @@ function EditProduct() {
           <div className="productImg">
             <div className="allimg">
               {previmg?.map((img , index)=>(
-             <img src={`http://localhost:8086/uploads/${img}`||img} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
+             <img src={img} className="allimgs" key={index} onMouseOver={()=>setPrevImg(index)}/>
               ))}
             </div>
             <div className="mainimg">
             {Array.isArray(product.images) && product.images.length > 0 && (
-            <img src={`http://localhost:8086/uploads/${previmg[prevImg]}`} className="singleimg" />
+            <img src={`${previmg[prevImg]}`} className="singleimg" />
             )}
-
             </div>
           </div>
           <div className="aboutProduct">

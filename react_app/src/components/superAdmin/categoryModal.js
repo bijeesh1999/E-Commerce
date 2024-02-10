@@ -8,9 +8,9 @@ import "./superAdmin.css";
 function CategoryModal(props) {
   const [count,setCount]=useState(1)
   const [key , setKey]=useState("")
-  const filterCategory=props?.data?.category;
+  const filterCategory=props?.data;
   const pageButtons = Array.from({ length: props.totalPage }, (_, index) => index + 1);
-  // console.log(pageButtons);
+  // console.log(props);
 
   const navigate = useNavigate();
   const [form, setForm] = useState(false);
@@ -136,9 +136,9 @@ function CategoryModal(props) {
           {filterCategory?.map((data, index) => (
             <tr key={index}>
               <td>{index+1}</td>
-              <td>{data.categoryName}</td>
+              <td>{data?.categoryName}</td>
               <td className="categoryAction">
-                <DeleteModal id={data._id} />
+                <DeleteModal id={data?._id} />
                 <i
                   className="fa-solid fa-pen-to-square"
                   onClick={() => editCategory(data)}

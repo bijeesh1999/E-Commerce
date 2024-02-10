@@ -3,7 +3,7 @@ const multer=require("multer");
 const Router=express.Router();
 const storage=require("../controllers/middleWares/multerMiddleware")
 
-const {getAllProducts,createProduct,getOneProductById,updateProductById,deleteProductsById,getAllCategogy}=require("../controllers/productController");
+const {getAllProducts,createProduct,getOneProductById,updateProductById,deleteProductsById,getProductsByCategory}=require("../controllers/productController");
 
 const upload=multer({storage:storage}).array("images");
 
@@ -15,6 +15,7 @@ Router.route("/:id")
   .get(getOneProductById)
   .put(upload , updateProductById)
   .delete(deleteProductsById)
+Router.route("/filter/:id").get(getProductsByCategory)
 
 
 

@@ -13,13 +13,23 @@ const getSeller = async (req, res) => {
     const sellers = await seller.find({});
     const totalPage = Math.ceil(sellers.length / limit);
 
+    const matchDatas = [
+      {
+          $or: [
+              { userName: { $regex: key, $options: 'i' } },
+              { emailId: { $regex: key, $options: 'i' } },
+          ],
+      },
+  ];
+  const matchConditions = matchDatas.map(matchData => ({ $match: matchData }));
+
     const pipeline = [
       {
         $facet: {
           data: [
             { $skip : skip },
             { $limit : limit },
-            ...(key ? [{ $match: { userName: key } }] : []),
+            ...matchConditions
           ]
         }},{
          $project: { 

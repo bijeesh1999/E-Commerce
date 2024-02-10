@@ -1,27 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteCategoryById, getCategories  } from '../redux/category/categoryApi';
+import { deleteCategoryById , getFilterCategory  } from '../redux/category/categoryApi';
 import { getProducts , deleteProductById } from '../redux/products/productApi';
+import { useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 // ... (existing imports)
 
-function DeleteModal({ id }) {
+function DeleteModal(props) {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
+
+  // const status=useSelector((state)=>state.category?.deleted)
+  // console.log(status);
 
   const handleClose = () => {
     setShow(false);
   };
 
   const deleteProduct = async(id) => {
-   await dispatch(deleteCategoryById(id));
-   await dispatch(deleteProductById(id))
-   await  dispatch(getProducts())
-   await dispatch(getCategories())
+    await dispatch(deleteCategoryById(id));
+    await dispatch(getFilterCategory());
+   await dispatch(deleteProductById(id));
+   await  dispatch(getProducts());
     handleClose();
   };
+
+  // useEffect(()=>{
+  //   if(status == "OK"){
+  //     dispatch(getFilterCategory());
+  //   }
+  // },[status])
 
   const handleShow = () => {
     setShow(true);
@@ -39,7 +49,7 @@ function DeleteModal({ id }) {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="danger" onClick={() => deleteProduct(id)}>
+          <Button variant="danger" onClick={() => deleteProduct(props.id)}>
             Delete
           </Button>
         </Modal.Footer>

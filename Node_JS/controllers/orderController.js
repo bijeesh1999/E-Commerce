@@ -11,14 +11,22 @@ const getAllOrder=async (req,res) => {
     const totalPage = Math.ceil(orders.length / limit);
 
     // console.log(key);
-
-
+    const matchDatas = [
+        {
+            $or: [
+                { orderId: { $regex: key, $options: 'i' } },
+                { userName: { $regex: key, $options: 'i' } },
+                { status: { $regex: key, $options: 'i' } },
+            ],
+        },
+    ];
+    const matchConditions = matchDatas.map(matchData => ({ $match: matchData }));
     const pipeline=[{
         $facet:{
             data:[
                 {$skip:skip},
                 {$limit:limit},
-                ...(key ? [{ $match: { userName: key } }] : []),
+                ...matchConditions
             ]
         }},{
        $project:{

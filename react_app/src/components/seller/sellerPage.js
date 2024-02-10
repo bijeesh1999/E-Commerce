@@ -1,7 +1,7 @@
 import React, { useState , useEffect } from "react";
 import { useDispatch ,useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getProducts,deleteProductById } from "../../redux/products/productApi";
+import { getProducts} from "../../redux/products/productApi";
 import DeleteModal from "../deleteConfirm";
 import SellerForm from "./sellAproduct";
 import "./sellingProductForm.css";
@@ -47,7 +47,7 @@ function SellerPage() {
                 <img src={`http://localhost:8086/uploads/${data?.images[0]}`} />
                 <div className="actions">
                 <DeleteModal id={data._id}/>
-                <i className="fa-solid fa-pen-to-square" onClick={()=>navigate(`/editOneProduct/${data._id}`)}></i>
+                <i className="fa-solid fa-pen-to-square" onClick={()=>navigate(`/editOneProduct/${data._id}?navigate=/adminSelling`)}></i>
                 </div>
             </div>
             <div className="details">
@@ -58,7 +58,6 @@ function SellerPage() {
                     <h5>{data.discount}</h5>
                 </div>
                 <h5>Post Date : {data.createdAt.split("T")[0]}</h5>
-
             </div>
         </div>
         ))}

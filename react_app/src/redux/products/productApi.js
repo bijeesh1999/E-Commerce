@@ -52,10 +52,21 @@ export const editProduct = createAsyncThunk(
     'editProduct',
     async ({id,formData}) => {
         // const {id , formData}=data
-        console.log("+++",id);
+        // console.log("+++",id);
         // console.log(formData);
         const res = await axios.put(`http://localhost:8086/products/${id}`,formData);
-        console.log(res.data);
+        // console.log(res.data);
         return res.statusText;
+        // return res.data;
+    },
+);
+
+export const getProductsByCategory = createAsyncThunk(
+    'getProductsByCategory',
+    async (id) => {
+        console.log("+++",id);
+        const res = await axios.get(`http://localhost:8086/products/filter/${id}`);
+        // console.log(res.data);
+        return res.data;
     },
 );

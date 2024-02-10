@@ -15,12 +15,22 @@ const getUser = async (req,res) => {
         const users=await user.find({});
         const totalPage=Math.ceil(users.length / limit);
 
+        const matchDatas = [
+            {
+                $or: [
+                    { userName: { $regex: key, $options: 'i' } },
+                    { emailId: { $regex: key, $options: 'i' } },
+                ],
+            },
+        ];
+        const matchConditions = matchDatas.map(matchData => ({ $match: matchData }));
+
         const pipeline=[{
             $facet:{
                 data:[
                     {$skip:skip},
                     {$limit:limit},
-                    ...(key ? [{ $match: { userName: key } }] : []),
+                    ...matchConditions
                 ]
             }
             },{ $project: {_id:0,user:"$data"} }

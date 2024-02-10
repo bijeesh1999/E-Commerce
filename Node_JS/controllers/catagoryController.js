@@ -10,15 +10,31 @@ const getFilterCategory=async (req,res)=>{
         const skip=limit * (page-1);
         const key=req.query.key;
         const Category=await category.find({});
-        const totalPage=Math.ceil(Category.length / limit);
-        console.log(page,key,limit);
+        // console.log(page,key,limit);
+        const categoryLength=Category.map((data)=>{
+            if(data.isDeleted === false){
+                return data;
+            }
+        })
+        // console.log("category:",categoryLength.length);
+        const totalPage=Math.ceil(categoryLength.length / limit);
+
+
+        const matchDatas = [
+            {
+                $or: [
+                    { categoryName: { $regex: key, $options: 'i' } },
+                ],
+            },
+        ];
+        const matchConditions = matchDatas.map(matchData => ({ $match: matchData }));
 
         const pipeline=[{
             $facet:{
                 data:[
                     {$skip:skip},
                     {$limit:limit},
-                    ...(key ? [{ $match: { categoryName: key } }] : []),
+                    ...matchConditions                
                 ]
             }
             },{ $project: {_id:0,category:"$data"} }
@@ -28,13 +44,30 @@ const getFilterCategory=async (req,res)=>{
         if(!allCategory){
             res.status(400).json("allCategogy not found")
         }else{
-            res.status(200).json({allCategory,totalPage})
+           await allCategory.map((data)=>{
+            const Category=data.category.map((category)=>{
+                if(category.isDeleted == false){
+                    return category;
+                }
+            })
+            const filterCategory = Category.filter((item) => {if(item !== null){
+                return item
+            }});
+            // console.log("filterCategory",filterCategory);
+            res.status(200).json({filterCategory,totalPage})
+        })
+
         }
     } catch (error) {
         console.log(error);
     }
 
 }
+
+
+
+// ===========================================================================
+
 
 
 const getAllCategory= async (req,res)=>{
@@ -44,7 +77,18 @@ const getAllCategory= async (req,res)=>{
         if(!Category){
             res.status(400).json("allCategogy not found")
         }else{
-            res.status(200).json(Category)
+            const validCategory=await Category.map((item) => {
+                if(item.isDeleted === false){
+                    return item;
+                }
+            })
+            const category=validCategory.filter((item)=>{
+                if(item !== null ){
+                    return item;
+                }
+            })
+            // console.log("category:",category);
+            res.status(200).json(category);
         }
     } catch (error) {
         console.log(error);
@@ -108,11 +152,11 @@ const updateCategoryById= async (req,res)=>{
 
 const deleteCategoryById= async (req,res)=>{
     const {id}=req.params;
-    console.log(id);
+    // console.log(id);
     if(!id){
         res.status(400).json("id is not found")
       }else{
-        let deleteById=await category.findByIdAndDelete(id);
+        let deleteById=await category.findByIdAndUpdate(id,{isDeleted:true});
         res.status(200).json(deleteById)
       }
 

@@ -42,7 +42,10 @@ function AllOrder(){
     console.log(key);
     return(
         <>
-        <input type="search"name="search"className="search"  onChange={handleSearch}/>
+        <div className="searchContainer">
+        <input type="search"name="search"className="search" placeholder="search here..."  onChange={handleSearch}/>
+        <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
         <div className="orderWraper">
         <table className="orderList">
             <thead>

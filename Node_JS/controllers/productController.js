@@ -1,5 +1,6 @@
 const product = require("../mongoDb/models/productSchema");
 const category = require("../mongoDb/models/categorySchema");
+const mongoose=require("mongoose")
 
 let categoryId;
 const getAllProducts = async (req, res) => {
@@ -139,8 +140,6 @@ const updateProductById = async (req, res) => {
   }catch(error){
     console.log("error");
   }
-
-
 };
 
 
@@ -162,10 +161,25 @@ const deleteProductsById = async (req, res) => {
   }
 };
 
+const getProductsByCategory = async (req,res) => {
+  const id=new mongoose.Types.ObjectId(req.params.id)
+  console.log(id);
+  let data= await product.aggregate([
+    {
+        $match: {
+            'categoryId': id
+        }
+    }
+]);
+console.log(data);
+res.status(200).json(data)
+}
+
 module.exports = {
   getAllProducts,
   createProduct,
   getOneProductById,
   updateProductById,
   deleteProductsById,
+  getProductsByCategory
 };

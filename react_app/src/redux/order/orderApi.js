@@ -5,7 +5,7 @@ import axios from "axios";
 export const getAllOrder=createAsyncThunk("getAllOrder",
     async ({page,key})=>{
         console.log(page,key);
-        const allOrdr = await axios.get(`http://localhost:8086/order?page=${page}&limit=${5}&key=${key}`)
+        const allOrdr = await axios.get(`http://localhost:8086/order?page=${page}&limit=${5}&key=${key?key:key=""}`)
         if(allOrdr){
             return allOrdr.data;
         }
