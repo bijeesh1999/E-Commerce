@@ -18,10 +18,7 @@ import AllSellerList from "./components/superAdmin/allSellerse";
 import AllOrder from "./components/superAdmin/allOrder";
 import AdminLogin from "./components/superAdmin/adminLogin";
 
-
-// import User from "./User";
-// import Seller from "./Seller";
-// import MainAdmin from "./MainAdmin";
+import Vanta from "./vanta";
 import "./App.css";
 
 function App() {
@@ -49,35 +46,11 @@ function App() {
           <Route path="/allOrderList" element={<AllOrder />} />
           <Route path="/superAdminLogin" element={<AdminLogin />} />
 
+          <Route path="/vanta" element={<Vanta />} />
+
         </Routes>
       </BrowserRouter>
   );
 }
 
 export default App;
-
-      {/* <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route index element={<Home />} />
-          <Route path="/product/:id" element={<SingleProduct />} />
-          <Route path="/success/:id" element={<ByProduct />} />
-          <Route path="/singleCategory/:id" element={<SingleCategory />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="*" element={<ByProduct />} />
-          <Route path="/adminSelling" element={<SellerPage />} />
-          <Route path="/superAdmin" element={<SuperAdmin />} />
-          <Route path="/allProduct" element={<AllProuct />} />
-          <Route path="/OrderSummary/:id" element={<OrderSummary />} />
-          <Route path="/myProducts" element={<SellerProducts/>} />
-          <Route path="/MyOrder" element={<MyOrder />} />
-          <Route path="/editOneProduct/:id" element={<EditProduct />} />
-        </Routes>
-      </BrowserRouter> */}
-
-
-    //   <div className="App">
-    //   <User />
-    //   {/* <Seller /> */}
-    //   <MainAdmin />
-    // </div>

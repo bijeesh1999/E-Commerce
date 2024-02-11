@@ -3,12 +3,31 @@ import { useForm } from "react-hook-form";
 import { useDispatch,useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginAdmin } from "../../redux/superAdmin/superAdminApi"; 
+import BIRDS from "vanta/src/vanta.birds"
+
+
 
 
 function AdminLogin() {
     const navigate=useNavigate();
     const dispatch=useDispatch();
     const [err,setErr]=useState("")
+
+    useEffect(() => {
+      BIRDS({
+          el:".adminLoginContainer",
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          scaleMobile: 1.00,
+          backgroundColor: 0x90909,
+          color1: 0xf70a0a,
+          colorMode: "variance"
+      })
+    }, []);
   const {
     register,
     handleSubmit,
@@ -23,9 +42,9 @@ function AdminLogin() {
   console.log(isAdminlog);
 
   useEffect(()=>{
-    if(isAdminlog.status == 201){
+    if(isAdminlog.status === 201){
         setErr(isAdminlog.data)
-    }else if(isAdminlog.status == 200){
+    }else if(isAdminlog.status === 200){
         navigate("/superAdmin")
     }
   },[isAdminlog])
@@ -53,9 +72,10 @@ function AdminLogin() {
           {errors.password && <p>Password is required</p>}
         </div>
         <span>{err}</span>
-
         <button type="submit">Submit</button>
       </form>
+
+      <button onClick={()=>navigate("/vanta")}>vanta</button>
     </div>
   );
 }

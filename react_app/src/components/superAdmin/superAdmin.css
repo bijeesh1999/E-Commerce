@@ -376,9 +376,9 @@ button{
     position: relative;
     width: 100%;
     height: 100vh;
-    background-image: url("https://img.freepik.com/free-vector/copy-space-blu…d98bdc58b48a42978335b52142a914cd1565ecfd382c58700");
     form{
         width: 400px;
+        min-height: 400px;
         margin: auto;
         background-color: #b4b9b0;
         display: grid;
@@ -388,13 +388,23 @@ button{
         position: absolute;
         top: 3rem;
         left: calc(50% - 200px);
+        border: 1px solid white;
+        background: transparent;
+        color: white;
         .inputBlock{
             display:grid;
+            label{
+                margin: 0;
+                display: flex;
+                align-items: center;
+            }
             input{
                 padding: 6px 13px;
                 border: none;
-                border-radius: 5px;
                 outline: none;
+                background: transparent;
+                border-bottom: 1px solid white;
+                color: white;
             }
         }
         span{
@@ -408,19 +418,22 @@ button{
         }
         button{
             margin: 0 22px;
-            padding: 5px;
+            padding: 0 5px;
             border: 1px solid white;
             outline: none;
             border-radius: 5px;
             background: transparent;
+            color: white;
         }
         button:hover{
-            background-color: white !important;
+            background-color: rgb(95, 93, 93) !important;
+            color: white;
             opacity: .6 !important;
             transition: .5s;
         }
         h4{
             font-weight: 300;
+            margin: unset;
         }
     }
 }
